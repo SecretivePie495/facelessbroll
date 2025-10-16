@@ -39,12 +39,11 @@
         .horizontal-scroll-track:hover {
             animation-play-state: paused;
         }
-        
         .video-item {
             flex: 0 0 auto;
-            width: 200px;
-            height: 355px;
-            border-radius: 12px;
+            width: 280px;
+            height: 497px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
             background: #111;
@@ -53,8 +52,7 @@
                 0 0 0 1px rgba(220, 38, 38, 0.1),
                 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        
-        .video-item:hover {
+.video-item:hover {
             transform: scale(1.05);
             box-shadow: 
                 0 0 0 1px rgba(220, 38, 38, 0.3),
@@ -79,13 +77,12 @@
             mix-blend-mode: overlay;
             pointer-events: none;
         }
-        
         @keyframes scroll-horizontal {
             0% {
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(calc(-200px * 10 - 1.5rem * 10));
+                transform: translateX(calc(-280px * 10 - 1.5rem * 10));
             }
         }
 .custom-cursor {
@@ -111,18 +108,17 @@
             opacity: 0.7;
             mix-blend-mode: difference;
         }
-        
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
             padding: 4rem;
             perspective: 1000px;
         }
         
         .video-tile {
             position: relative;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             transform-style: preserve-3d;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -131,8 +127,7 @@
                 0 10px 30px rgba(0, 0, 0, 0.5),
                 0 0 50px rgba(220, 38, 38, 0.05);
         }
-        
-        .video-tile::before {
+.video-tile::before {
             content: '';
             position: absolute;
             top: 0;
@@ -154,17 +149,16 @@
         /* Category Cards */
         .category-card {
             position: relative;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            height: 600px;
+            height: 700px;
             background: #111;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 
                 0 0 0 1px rgba(220, 38, 38, 0.1),
                 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        
-        .category-card:hover {
+.category-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 
                 0 0 0 1px rgba(220, 38, 38, 0.3),
@@ -328,7 +322,7 @@
 <section class="min-h-screen py-20 bg-black/50 mt-32">
 <div class="max-w-7xl mx-auto px-6 mb-8">
             <h2 class="text-3xl font-light text-white tracking-wide">
-                Luxury Reels Collection
+                4K Luxury Reels Bundles
             </h2>
         </div>
 <div class="horizontal-scroll-container">
@@ -355,7 +349,7 @@
     <section class="min-h-screen py-8 bg-black/50">
         <div class="max-w-7xl mx-auto px-6 mb-8">
             <h2 class="text-3xl font-light text-white tracking-wide">
-                More Luxury Reels
+                Success - Ready To Post reels
             </h2>
         </div>
 <div class="horizontal-scroll-container">
