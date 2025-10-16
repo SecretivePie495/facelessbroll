@@ -325,45 +325,28 @@
         </div>
     </header
     <!-- Luxury 4K Reels Section - Moved to Top -->
-z
+    <section class="min-h-screen flex flex-col justify-center pt-20 pb-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
+            <h2 class="text-3xl font-light text-white tracking-wide text-left">
+                Luxury 4K Reels
+            </h2>
+        </div>
+        <div class="horizontal-scroll-container">
+            <div class="horizontal-scroll-track" id="videoTrack">
+                <!-- Video items will be dynamically generated -->
             </div>
         </div>
-    </section>
-<section class="min-h-screen py-8 bg-black/50">
-        <div class="max-w-7xl mx-auto px-6 mb-8">
-            <h2 class="text-3xl font-light text-white tracking-wide">
-                Luxury Reels Collection
-            </h2>
-        </div>
-<div class="horizontal-scroll-container">
-        <div class="horizontal-scroll-track" id="additionalReelsTrack">
-            <!-- Additional reels will be dynamically generated -->
-        </div>
-    </section>
-
-    <!-- Duplicate Luxury Reels Section -->
-    <section class="min-h-screen py-8 bg-black/50">
-        <div class="max-w-7xl mx-auto px-6 mb-8">
-            <h2 class="text-3xl font-light text-white tracking-wide">
-                Luxury Reels Collection Duplicate
-            </h2>
-        </div>
-<div class="horizontal-scroll-container">
-        <div class="horizontal-scroll-track" id="duplicateReelsTrack">
-            <!-- Duplicate reels will be dynamically generated -->
-        </div>
-    </section>
-
-    <!-- More Luxury Reels Section - Reduced Spacing -->
-    <section class="min-h-screen py-8 bg-black/50">
-        <div class="max-w-7xl mx-auto px-6 mb-8">
+        
+        <!-- More Luxury Reels Section - Combined on Top -->
+        <div class="max-w-7xl mx-auto px-6 mb-8 mt-16">
             <h2 class="text-3xl font-light text-white tracking-wide">
                 More Luxury Reels
             </h2>
         </div>
-<div class="horizontal-scroll-container">
-        <div class="horizontal-scroll-track" id="moreReelsTrack">
-            <!-- More reels will be dynamically generated -->
+        <div class="horizontal-scroll-container">
+            <div class="horizontal-scroll-track" id="moreReelsTrack">
+                <!-- More reels will be dynamically generated -->
+            </div>
         </div>
     </section>
 <!-- How It Works Section -->
@@ -590,7 +573,13 @@ z
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", title: "Cyber Synapse" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", title: "Quantum Interface" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", title: "Digital Horizon" },
-      
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", title: "Virtual Catalyst" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", title: "Quantum Nexus" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", title: "Digital Catalyst" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", title: "Neural Gateway" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", title: "Cyber Dimension" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", title: "Quantum Realm" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", title: "Digital Odyssey" }
         ];
         // Generate more luxury reels section (9:16 horizontal scroll)
         const moreReelsTrack = document.getElementById('moreReelsTrack');
