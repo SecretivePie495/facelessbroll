@@ -825,3 +825,47 @@ function toggleFAQ(button) {
   }
 }
 </script>
+
+
+
+<!-- Item -->
+<div class="border border-white/10 rounded-xl overflow-hidden">
+  <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
+          onclick="toggleFAQGrid(this)">
+    <span class="text-lg font-semibold text-red-600">What is UTG Labs?</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <!-- Collapsible OUTER (no padding!) -->
+  <div class="grid grid-rows-[0fr] transition-all duration-500 overflow-hidden">
+    <!-- Inner content gets the padding -->
+    <div class="min-h-0 px-6 pb-4 text-white/70">
+      UTG Labs is an automation platform that helps creators build faceless content channels using ready-to-post luxury 4K reels, automated scheduling, and AI-driven branding tools.
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleFAQGrid(btn){
+  const outer = btn.nextElementSibling;          // grid container
+  const svg = btn.querySelector('svg');
+  const open = outer.classList.contains('grid-rows-[1fr]');
+
+  // Accordion behavior: close all
+  document.querySelectorAll('.grid.grid-rows-\\[1fr\\]').forEach(el=>{
+    el.classList.replace('grid-rows-[1fr]','grid-rows-[0fr]');
+  });
+  document.querySelectorAll('button svg.rotate-180').forEach(icon=>{
+    icon.classList.remove('rotate-180');
+  });
+
+  // Toggle this one
+  if(!open){
+    outer.classList.replace('grid-rows-[0fr]','grid-rows-[1fr]');
+    svg.classList.add('rotate-180');
+  }
+}
+</script>
