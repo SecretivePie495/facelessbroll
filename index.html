@@ -114,9 +114,9 @@
             gap: 2.5rem;
             padding: 4rem;
             perspective: 1000px;
+            justify-items: center;
         }
-        
-        .video-tile {
+.video-tile {
             position: relative;
             border-radius: 16px;
             overflow: hidden;
@@ -157,6 +157,7 @@
             box-shadow: 
                 0 0 0 1px rgba(220, 38, 38, 0.1),
                 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
         }
 .category-card:hover {
             transform: translateY(-8px) scale(1.02);
@@ -303,24 +304,15 @@
     <div class="parallax-bg" id="vanta-bg"></div>
     <!-- Header - Clean and Modern -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-light tracking-tight">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-center items-center">
+            <div class="text-2xl font-light tracking-tight text-center">
                 <span class="text-white">QUANTUM</span>
                 <span class="text-red-600">CANVAS</span>
-            </div>
-            <div class="flex gap-4">
-                <button class="px-6 py-2 text-white/80 hover:text-white border border-white/10 hover:border-red-600/50 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/10">
-                    Login
-                </button>
-                <button class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20">
-                    Signup
-                </button>
-            </div>
         </div>
-    </header
+    </header>
     <!-- Luxury 4K Reels Section -->
 <section class="min-h-screen py-20 bg-black/50 mt-32">
-<div class="max-w-7xl mx-auto px-6 mb-8">
+        <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
             <h2 class="text-4xl font-bold text-white-600 tracking-wide uppercase">
                 4K Luxury Reels
             </h2>
@@ -330,10 +322,9 @@
             <!-- Additional reels will be dynamically generated -->
         </div>
     </section>
-
-<!-- Email Signup Section -->
+    <!-- Email Signup Section -->
     <section class="min-h-screen py-20 bg-black relative">
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-4xl mx-auto px-6 text-center">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-light mb-4 text-white">
                         Ready To Start Done For You Automated Faceless Channel?
@@ -344,11 +335,11 @@
             </div>
             
             <div class="max-w-xl mx-auto">
-                <div class="flex gap-4">
+                <div class="flex gap-4 justify-center">
                     <input 
                         type="email" 
                         placeholder="Enter your email address" 
-                        class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300"
+                        class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
                     >
                     <button class="px-8 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20">
                         Signup
@@ -357,24 +348,21 @@
             </div>
         </div>
     </section>
-
     <!-- Duplicate Luxury Reels Section -->
 <section class="min-h-screen py-8 bg-black/50">
-        <div class="max-w-7xl mx-auto px-6 mb-8">
+        <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
             <h2 class="text-4xl font-bold text-white-600 tracking-wide uppercase">
                 LUXURY REELS
             </h2>
-</div>
+        </div>
 <div class="horizontal-scroll-container">
         <div class="horizontal-scroll-track" id="duplicateReelsTrack">
             <!-- Duplicate reels will be dynamically generated -->
         </div>
-        </div>
     </section>
-
     <!-- More Luxury Reels Section - Reduced Spacing -->
     <section class="min-h-screen py-8 bg-black/50">
-        <div class="max-w-7xl mx-auto px-6 mb-8">
+        <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
             <h2 class="text-4xl font-bold text--600 tracking-wide uppercase">
                 Success - Ready To Post reels
             </h2>
@@ -395,9 +383,8 @@
                     Transform your digital presence in three simple steps
                 </p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                <!-- Step 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 justify-items-center">
+<!-- Step 1 -->
                 <div class="group relative">
                     <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10">
                         <div class="text-4xl font-light text-red-600 mb-4">01</div>
@@ -447,9 +434,8 @@
                     Discover premium content across our most popular niches
                 </p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-                <!-- Luxury -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 justify-items-center">
+<!-- Luxury -->
                 <div class="category-card group">
                     <div class="video-container">
                         <video autoplay muted loop playsinline>
@@ -533,12 +519,11 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 rounded-xl blur-lg opacity-50 -z-10"></div>
                 </div>
             </div>
-        </div>
+</div>
     </section>
-
     <!-- Email Signup Section -->
     <section class="min-h-screen py-20 bg-black relative">
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-4xl mx-auto px-6 text-center">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-light mb-4 text-white">
                         Ready To Start Done For You Automated Faceless Channel?
@@ -549,11 +534,11 @@
             </div>
             
             <div class="max-w-xl mx-auto">
-                <div class="flex gap-4">
+                <div class="flex gap-4 justify-center">
                     <input 
                         type="email" 
                         placeholder="Enter your email address" 
-                        class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300"
+                        class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
                     >
                     <button class="px-8 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20">
                         Signup
@@ -562,7 +547,6 @@
             </div>
         </div>
     </section>
-
 <script>
         // Initialize custom cursor
         const cursor = document.querySelector('.custom-cursor');
