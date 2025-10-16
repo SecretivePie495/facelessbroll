@@ -322,15 +322,15 @@
             </div>
         </div>
     </section>
-
-    <!-- More Luxury Reels Section -->
-    <section class="min-h-screen py-20 bg-black/50">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-light text-white tracking-wide">
-                + More Luxury Reels
-            </h2>
-        </div>
-        <div class="video-grid" id="moreReels">
+        <!-- More Luxury Reels Section -->
+        <section class="min-h-screen py-20 bg-black/50">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-light text-white tracking-wide">
+            + More Luxury Reels
+        </h2>
+    </div>
+    <div class="horizontal-scroll-container">
+        <div class="horizontal-scroll-track" id="moreReelsTrack">
             <!-- More reels will be dynamically generated -->
         </div>
     </section>
@@ -431,25 +431,24 @@
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", title: "Quantum Realm" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", title: "Digital Odyssey" }
         ];
+        // Generate more luxury reels section (9:16 horizontal scroll)
+        const moreReelsTrack = document.getElementById('moreReelsTrack');
         
-        // Generate more luxury reels section
-        const moreReels = document.getElementById('moreReels');
+        // Create duplicate videos for seamless infinite scroll
+        const allMoreVideos = [...videoData, ...videoData];
         
-        videoData.forEach((video, index) => {
-            const videoTile = document.createElement('div');
-            videoTile.className = 'video-tile';
+        allMoreVideos.forEach((video, index) => {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
             
-            videoTile.innerHTML = `
-                <div class="video-container">
-                    <video autoplay muted loop playsinline>
-                        <source src="${video.src}" type="video/mp4">
-                    </video>
-                    <div class="glow-overlay"></div>
-                    <div class="neon-border"></div>
-                </div>
+            videoItem.innerHTML = `
+                <video autoplay muted loop playsinline>
+                    <source src="${video.src}" type="video/mp4">
+                </video>
+                <div class="video-glow"></div>
             `;
             
-            moreReels.appendChild(videoTile);
+            moreReelsTrack.appendChild(videoItem);
         });
 // Generate horizontal video gallery
         const videoTrack = document.getElementById('videoTrack');
