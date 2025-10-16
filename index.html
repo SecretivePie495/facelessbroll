@@ -52,6 +52,30 @@
                 0 0 0 1px rgba(220, 38, 38, 0.1),
                 0 10px 30px rgba(0, 0, 0, 0.5);
         }
+        
+        .video-item-nine-sixteen {
+            position: relative;
+            background: #111;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 0 0 1px rgba(220, 38, 38, 0.1),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-item-square {
+            position: relative;
+            background: #111;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .video-item-nine-sixteen:hover,
+        .video-item-square:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 0 1px rgba(220, 38, 38, 0.3),
+                0 20px 40px rgba(0, 0, 0, 0.8),
+                0 0 60px rgba(220, 38, 38, 0.2);
+        }
 .video-item:hover {
             transform: scale(1.05);
             box-shadow: 
@@ -319,15 +343,25 @@
         </div>
     </header
     <!-- Luxury 4K Reels Section -->
-<section class="min-h-screen py-20 bg-black/50 mt-32">
-<div class="max-w-7xl mx-auto px-6 mb-8">
+    <section class="min-h-screen py-20 bg-black/50 mt-32">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
             <h2 class="text-3xl font-light text-white tracking-wide">
                 4K Luxury Reels Bundles
             </h2>
         </div>
-<div class="horizontal-scroll-container">
-        <div class="horizontal-scroll-track" id="additionalReelsTrack">
-            <!-- Additional reels will be dynamically generated -->
+        
+        <!-- 9:16 Videos Grid -->
+        <div class="max-w-7xl mx-auto px-6 mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                <!-- 9:16 video items will be dynamically generated -->
+            </div>
+        </div>
+        
+        <!-- Square Videos Grid -->
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+                <!-- Square video items will be dynamically generated -->
+            </div>
         </div>
     </section>
 <section class="min-h-screen py-8 pt-32 bg-black/50">
@@ -563,7 +597,7 @@
         document.addEventListener('mouseup', () => {
             cursor.style.transform = 'scale(1)';
         });
-// Video data - 20 vertical 9:16 sample videos
+        // Video data - Expanded with more videos for full page coverage
         const videoData = [
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", title: "Digital Dreamscape" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", title: "Neural Pathways" },
@@ -597,9 +631,50 @@
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview_512kb.mp4", title: "GTI HD" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun_512kb.mp4", title: "Bullrun HD" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand_512kb.mp4", title: "Car HD" }
-      
-];
-        // Generate more luxury reels section (9:16 horizontal scroll)
+        ];
+        
+        // Generate 9:16 Videos Grid
+        const nineSixteenGrid = document.querySelector('.grid.grid-cols-2.md\\:grid-cols-3.lg\\:grid-cols-4.xl\\:grid-cols-5');
+        
+        // Create 40 9:16 video items to fill the section
+        for (let i = 0; i < 40; i++) {
+            const video = videoData[i % videoData.length];
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item-nine-sixteen rounded-2xl overflow-hidden bg-gray-900';
+            
+            videoItem.innerHTML = `
+                <div class="video-container-nine-sixteen" style="padding-bottom: 177.78%">
+                    <video autoplay muted loop playsinline class="w-full h-full object-cover rounded-2xl">
+                        <source src="${video.src}" type="video/mp4">
+                    </video>
+                    <div class="glow-overlay"></div>
+                </div>
+            `;
+            
+            nineSixteenGrid.appendChild(videoItem);
+        }
+        
+        // Generate Square Videos Grid
+        const squareGrid = document.querySelector('.grid.grid-cols-3.md\\:grid-cols-4.lg\\:grid-cols-5.xl\\:grid-cols-6');
+        
+        // Create 36 square video items to fill the section
+        for (let i = 0; i < 36; i++) {
+            const video = videoData[i % videoData.length];
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item-square rounded-2xl overflow-hidden bg-gray-900';
+            
+            videoItem.innerHTML = `
+                <div class="video-container-square aspect-square">
+                    <video autoplay muted loop playsinline class="w-full h-full object-cover rounded-2xl">
+                        <source src="${video.src}" type="video/mp4">
+                    </video>
+                    <div class="glow-overlay"></div>
+                </div>
+            `;
+            
+            squareGrid.appendChild(videoItem);
+        }
+// Generate more luxury reels section (9:16 horizontal scroll)
         const moreReelsTrack = document.getElementById('moreReelsTrack');
         
         // Create duplicate videos for seamless infinite scroll
