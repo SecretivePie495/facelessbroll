@@ -597,21 +597,29 @@
         document.addEventListener('mouseup', () => {
             cursor.style.transform = 'scale(1)';
         });
-// Video data - 20 vertical 9:16 sample videos
-        const videoData = [
+        // Video data - 5 vertical 9:16 sample videos for each section
+        const videoData4k = [
             { src: "https://storage.googleapis.com/media.utg-media.com/instagram_C4dyNz9Nbdk_mute.mp4", title: "Digital Dreamscape" },
             { src: "https://storage.googleapis.com/media.utg-media.com/324128018_875607130523606_6814198660096768270_n.mp4", title: "Neural Pathways" },
             { src: "https://storage.googleapis.com/media.utg-media.com/318020133_244456238648375_4691320352052561618_n(1).mp4", title: "Quantum Flux" },
             { src: "https://storage.googleapis.com/media.utg-media.com/-237407181909170842.MP4", title: "Virtual Cosmos" },
             { src: "https://storage.googleapis.com/media.utg-media.com/Auto885%202.mp4", title: "AI Genesis" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", title: "Data Streams" }
-      
-];
+        ];
+
+        const videoDataLuxury = [
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", title: "Luxury Dreams" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", title: "Elegant Vision" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", title: "Premium Glow" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", title: "Exclusive Escape" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", title: "Opulent Joy" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", title: "Lavish Moments" }
+        ];
         // Generate more luxury reels section (9:16 horizontal scroll)
         const moreReelsTrack = document.getElementById('moreReelsTrack');
         
         // Create duplicate videos for seamless infinite scroll
-        const allMoreVideos = [...videoData, ...videoData];
+        const allMoreVideos = [...videoDataLuxury, ...videoDataLuxury];
         
         allMoreVideos.forEach((video, index) => {
             const videoItem = document.createElement('div');
@@ -630,7 +638,7 @@
         const additionalReelsTrack = document.getElementById('additionalReelsTrack');
         
         // Create duplicate videos for seamless infinite scroll
-        const allAdditionalVideos = [...videoData, ...videoData];
+        const allAdditionalVideos = [...videoData4k, ...videoData4k];
         
         allAdditionalVideos.forEach((video, index) => {
             const videoItem = document.createElement('div');
@@ -650,9 +658,8 @@
         const duplicateReelsTrack = document.getElementById('duplicateReelsTrack');
         
         // Create duplicate videos for seamless infinite scroll
-        const allDuplicateVideos = [...videoData, ...videoData];
-        
-        allDuplicateVideos.forEach((video, index) => {
+        const allDuplicateVideos = [...videoDataLuxury, ...videoDataLuxury];
+allDuplicateVideos.forEach((video, index) => {
             const videoItem = document.createElement('div');
             videoItem.className = 'video-item';
             
@@ -665,26 +672,7 @@
             
             duplicateReelsTrack.appendChild(videoItem);
         });
-// Generate horizontal video gallery
-        const videoTrack = document.getElementById('videoTrack');
-        
-        // Create duplicate videos for seamless infinite scroll
-        const allVideos = [...videoData, ...videoData];
-        
-        allVideos.forEach((video, index) => {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            videoItem.innerHTML = `
-                <video autoplay muted loop playsinline>
-                    <source src="${video.src}" type="video/mp4">
-                </video>
-                <div class="video-glow"></div>
-            `;
-            
-            videoTrack.appendChild(videoItem);
-        });
-        // Category card animations
+// Category card animations
         const categoryCards = document.querySelectorAll('.category-card');
         
         categoryCards.forEach(card => {
