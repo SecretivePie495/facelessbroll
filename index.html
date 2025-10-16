@@ -313,9 +313,18 @@
             <div class="text-2xl font-light tracking-tight">
                 <span class="text-white">QUANTUM</span>
                 <span class="text-red-600">CANVAS</span>
+            </div>
+            <div class="flex gap-4">
+                <button class="px-6 py-2 text-white/80 hover:text-white border border-white/10 hover:border-red-600/50 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/10">
+                    Login
+                </button>
+                <button class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20">
+                    Signup
+                </button>
+            </div>
         </div>
     </header
-<!-- Luxury 4K Reels Section - Moved to Top -->
+    <!-- Luxury 4K Reels Section - Moved to Top -->
     <section class="min-h-screen flex flex-col justify-center pt-20 pb-8 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 mb-8">
             <h2 class="text-3xl font-light text-white tracking-wide text-left">
@@ -340,7 +349,6 @@
             <!-- More reels will be dynamically generated -->
         </div>
     </section>
-
     <!-- Additional Luxury Reels Section -->
     <section class="min-h-screen py-8 bg-black/50">
         <div class="max-w-7xl mx-auto px-6 mb-8">
@@ -351,6 +359,19 @@
 <div class="horizontal-scroll-container">
         <div class="horizontal-scroll-track" id="additionalReelsTrack">
             <!-- Additional reels will be dynamically generated -->
+        </div>
+    </section>
+
+    <!-- Duplicate Luxury Reels Section -->
+    <section class="min-h-screen py-8 bg-black/50">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
+            <h2 class="text-3xl font-light text-white tracking-wide">
+                Luxury Reels Collection Duplicate
+            </h2>
+        </div>
+<div class="horizontal-scroll-container">
+        <div class="horizontal-scroll-track" id="duplicateReelsTrack">
+            <!-- Duplicate reels will be dynamically generated -->
         </div>
     </section>
 <!-- How It Works Section -->
@@ -604,7 +625,6 @@
             
             moreReelsTrack.appendChild(videoItem);
         });
-
         // Generate additional luxury reels section
         const additionalReelsTrack = document.getElementById('additionalReelsTrack');
         
@@ -623,6 +643,26 @@
             `;
             
             additionalReelsTrack.appendChild(videoItem);
+        });
+
+        // Generate duplicate luxury reels section
+        const duplicateReelsTrack = document.getElementById('duplicateReelsTrack');
+        
+        // Create duplicate videos for seamless infinite scroll
+        const allDuplicateVideos = [...videoData, ...videoData];
+        
+        allDuplicateVideos.forEach((video, index) => {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+            
+            videoItem.innerHTML = `
+                <video autoplay muted loop playsinline>
+                    <source src="${video.src}" type="video/mp4">
+                </video>
+                <div class="video-glow"></div>
+            `;
+            
+            duplicateReelsTrack.appendChild(videoItem);
         });
 // Generate horizontal video gallery
         const videoTrack = document.getElementById('videoTrack');
