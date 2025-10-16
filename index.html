@@ -712,3 +712,116 @@ allDuplicateVideos.forEach((video, index) => {
     </script>
 </body>
 </html>
+
+<!-- FAQ Section -->
+<section class="py-16 bg-black text-white border-t border-white/10">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12 text-white tracking-wide uppercase">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="space-y-4">
+
+      <!-- Question 1 -->
+      <div class="border border-white/10 rounded-xl overflow-hidden">
+        <button 
+          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
+          onclick="toggleFAQ(this)">
+          <span class="text-lg font-semibold text-red-600">What is UTG Labs?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+          UTG Labs is an automation platform that helps creators build faceless content channels using ready-to-post luxury 4K reels, automated scheduling, and AI-driven branding tools.
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="border border-white/10 rounded-xl overflow-hidden">
+        <button 
+          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
+          onclick="toggleFAQ(this)">
+          <span class="text-lg font-semibold text-red-600">Do I need to show my face to use it?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+          No — UTG Labs is designed for faceless creators. You can build a complete personal or business brand without appearing on camera.
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="border border-white/10 rounded-xl overflow-hidden">
+        <button 
+          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
+          onclick="toggleFAQ(this)">
+          <span class="text-lg font-semibold text-red-600">What platforms can I post to?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+          You can automate content for Instagram Reels, TikTok, and YouTube Shorts — with more platforms coming soon.
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="border border-white/10 rounded-xl overflow-hidden">
+        <button 
+          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
+          onclick="toggleFAQ(this)">
+          <span class="text-lg font-semibold text-red-600">Can I upload my own reels?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+          Yes. You can upload your own content, mix it with UTG Labs’ 4K reel packs, and manage everything from one dashboard.
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="border border-white/10 rounded-xl overflow-hidden">
+        <button 
+          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
+          onclick="toggleFAQ(this)">
+          <span class="text-lg font-semibold text-red-600">Is there a free trial?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+          Yes — you can start free with your first 20 reels to experience the automation tools before upgrading.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFAQ(button) {
+  const answer = button.nextElementSibling;
+  const svg = button.querySelector("svg");
+  const isOpen = answer.classList.contains("max-h-96");
+
+  // Close all others
+  document.querySelectorAll("[id^='duplicateReelsTrack'] ~ div div.max-h-96, section div.max-h-96").forEach(el => {
+    el.classList.replace("max-h-96", "max-h-0");
+  });
+  document.querySelectorAll("section svg.rotate-180").forEach(icon => {
+    icon.classList.remove("rotate-180");
+  });
+
+  // Toggle clicked one
+  if (!isOpen) {
+    answer.classList.replace("max-h-0", "max-h-96");
+    svg.classList.add("rotate-180");
+  } else {
+    answer.classList.replace("max-h-96", "max-h-0");
+    svg.classList.remove("rotate-180");
+  }
+}
+</script>
