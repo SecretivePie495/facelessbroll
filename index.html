@@ -337,19 +337,32 @@
             </div>
         </div>
     </section>
-        <!-- More Luxury Reels Section - Reduced Spacing -->
-        <section class="min-h-screen py-8 bg-black/50">
-            <div class="max-w-7xl mx-auto px-6 mb-8">
-                <h2 class="text-3xl font-light text-white tracking-wide">
-                    More Luxury Reels
-                </h2>
-            </div>
+    <!-- More Luxury Reels Section - Reduced Spacing -->
+    <section class="min-h-screen py-8 bg-black/50">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
+            <h2 class="text-3xl font-light text-white tracking-wide">
+                More Luxury Reels
+            </h2>
+        </div>
 <div class="horizontal-scroll-container">
         <div class="horizontal-scroll-track" id="moreReelsTrack">
             <!-- More reels will be dynamically generated -->
         </div>
     </section>
-    <!-- How It Works Section -->
+
+    <!-- Additional Luxury Reels Section -->
+    <section class="min-h-screen py-8 bg-black/50">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
+            <h2 class="text-3xl font-light text-white tracking-wide">
+                Luxury Reels Collection
+            </h2>
+        </div>
+<div class="horizontal-scroll-container">
+        <div class="horizontal-scroll-track" id="additionalReelsTrack">
+            <!-- Additional reels will be dynamically generated -->
+        </div>
+    </section>
+<!-- How It Works Section -->
     <section class="min-h-screen py-20 bg-black relative">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
@@ -581,7 +594,7 @@
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", title: "Quantum Realm" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", title: "Digital Odyssey" }
         ];
-// Generate more luxury reels section (9:16 horizontal scroll)
+        // Generate more luxury reels section (9:16 horizontal scroll)
         const moreReelsTrack = document.getElementById('moreReelsTrack');
         
         // Create duplicate videos for seamless infinite scroll
@@ -599,6 +612,26 @@
             `;
             
             moreReelsTrack.appendChild(videoItem);
+        });
+
+        // Generate additional luxury reels section
+        const additionalReelsTrack = document.getElementById('additionalReelsTrack');
+        
+        // Create duplicate videos for seamless infinite scroll
+        const allAdditionalVideos = [...videoData, ...videoData];
+        
+        allAdditionalVideos.forEach((video, index) => {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+            
+            videoItem.innerHTML = `
+                <video autoplay muted loop playsinline>
+                    <source src="${video.src}" type="video/mp4">
+                </video>
+                <div class="video-glow"></div>
+            `;
+            
+            additionalReelsTrack.appendChild(videoItem);
         });
 // Generate horizontal video gallery
         const videoTrack = document.getElementById('videoTrack');
