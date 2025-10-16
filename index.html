@@ -143,6 +143,7 @@
             z-index: 2;
             pointer-events: none;
         }
+        
         .video-tile:hover {
             transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.05);
             box-shadow: 
@@ -151,36 +152,7 @@
                 0 0 80px rgba(220, 38, 38, 0.2);
         }
         
-        /* Category Cards */
-        .category-card {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            height: 600px;
-            background: #111;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.1),
-                0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .category-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.3),
-                0 20px 40px rgba(0, 0, 0, 0.8),
-                0 0 60px rgba(220, 38, 38, 0.2);
-        }
-        
-        .category-card .video-container {
-            height: 100%;
-            padding-bottom: 0;
-        }
-        
-        .category-card .video-container video {
-            filter: contrast(1.2) brightness(0.8) saturate(1.3);
-        }
-.video-container {
+        .video-container {
             position: relative;
             width: 100%;
             height: 0;
@@ -305,6 +277,7 @@
     </style>
 </head>
 <body>
+    <div class="custom-cursor"></div>
     <div class="parallax-bg" id="vanta-bg"></div>
     <!-- Header - Clean and Modern -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg">
@@ -312,17 +285,54 @@
             <div class="text-2xl font-light tracking-tight">
                 <span class="text-white">QUANTUM</span>
                 <span class="text-red-600">CANVAS</span>
+            </div>
+            <div class="flex gap-4">
+                <button class="px-6 py-2 text-white/80 hover:text-white border border-white/10 hover:border-red-600/50 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/10">
+                    Login
+                </button>
+                <button class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20">
+                    Signup
+                </button>
+            </div>
         </div>
     </header>
-    <!-- More Luxury Reels Section -->
-<div class="max-w-7xl mx-auto px-6 mb-8 mt-16">
-            <h2 class="text-3xl font-light text-white tracking-wide">
-                More Luxury Reels
+    <!-- Luxury 4K Reels Section - Moved to Top -->
+    <section class="min-h-screen flex flex-col justify-center pt-20 pb-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
+            <h2 class="text-3xl font-light text-white tracking-wide text-left">
+                Luxury 4K Reels
             </h2>
+</div>
+<div class="horizontal-scroll-container">
+            <div class="horizontal-scroll-track" id="videoTrack">
+                <!-- Video items will be dynamically generated -->
+            </div>
         </div>
-        <div class="horizontal-scroll-container">
-            <div class="horizontal-scroll-track" id="moreReelsTrack">
-                <!-- More reels will be dynamically generated -->
+    </section>
+        <!-- More Luxury Reels Section - Reduced Spacing -->
+        <section class="min-h-screen py-8 bg-black/50">
+            <div class="max-w-7xl mx-auto px-6 mb-8">
+                <h2 class="text-3xl font-light text-white tracking-wide">
+                    More Luxury Reels
+                </h2>
+            </div>
+<div class="horizontal-scroll-container">
+        <div class="horizontal-scroll-track" id="moreReelsTrack">
+            <!-- More reels will be dynamically generated -->
+        </div>
+    </section>
+    <!-- Content Section -->
+    <section class="min-h-screen bg-black relative">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-black to-black z-10"></div>
+        <div class="relative z-20 max-w-4xl mx-auto px-6 py-20">
+            <div class="text-center">
+                <h2 class="text-4xl font-light mb-8 text-white">
+                    IMMERSIVE DIGITAL EXPERIENCES
+                </h2>
+                <p class="text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">
+                    Explore the boundaries of digital storytelling through our cinematic virtual realms. 
+                    Each experience is crafted with precision and passion, pushing the limits of what's possible.
+                </p>
             </div>
         </div>
     </section>
@@ -390,7 +400,7 @@
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", title: "Quantum Realm" },
             { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", title: "Digital Odyssey" }
         ];
-        // Generate more luxury reels section (9:16 horizontal scroll)
+// Generate more luxury reels section (9:16 horizontal scroll)
         const moreReelsTrack = document.getElementById('moreReelsTrack');
         
         // Create duplicate videos for seamless infinite scroll
@@ -409,13 +419,13 @@
             
             moreReelsTrack.appendChild(videoItem);
         });
-        // Generate additional luxury reels section
-        const additionalReelsTrack = document.getElementById('additionalReelsTrack');
+// Generate horizontal video gallery
+        const videoTrack = document.getElementById('videoTrack');
         
         // Create duplicate videos for seamless infinite scroll
-        const allAdditionalVideos = [...videoData, ...videoData];
+        const allVideos = [...videoData, ...videoData];
         
-        allAdditionalVideos.forEach((video, index) => {
+        allVideos.forEach((video, index) => {
             const videoItem = document.createElement('div');
             videoItem.className = 'video-item';
             
@@ -426,48 +436,9 @@
                 <div class="video-glow"></div>
             `;
             
-            additionalReelsTrack.appendChild(videoItem);
+            videoTrack.appendChild(videoItem);
         });
-
-        // Generate duplicate luxury reels section
-        const duplicateReelsTrack = document.getElementById('duplicateReelsTrack');
-        
-        // Create duplicate videos for seamless infinite scroll
-        const allDuplicateVideos = [...videoData, ...videoData];
-        
-        allDuplicateVideos.forEach((video, index) => {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            videoItem.innerHTML = `
-                <video autoplay muted loop playsinline>
-                    <source src="${video.src}" type="video/mp4">
-                </video>
-                <div class="video-glow"></div>
-            `;
-            
-            duplicateReelsTrack.appendChild(videoItem);
-        });
-// Category card animations
-        const categoryCards = document.querySelectorAll('.category-card');
-        
-        categoryCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const video = card.querySelector('video');
-                if (video) {
-                    video.playbackRate = 1.2;
-                }
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                const video = card.querySelector('video');
-                if (video) {
-                    video.playbackRate = 1.0;
-                }
-            });
-        });
-        
-        // Parallax effect
+// Parallax effect
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallax = document.querySelector('.parallax-bg');
