@@ -314,17 +314,8 @@
                 <span class="text-red-600">CANVAS</span>
         </div>
     </header>
-
-    <!-- Luxury 4K Reels Section -->
-    <section class="min-h-screen flex flex-col justify-center pt-20 pb-8 overflow-hidden">
-        <div class="horizontal-scroll-container">
-            <div class="horizontal-scroll-track" id="videoTrack">
-                <!-- Video items will be dynamically generated -->
-            </div>
-        </div>
-        
-        <!-- More Luxury Reels Section -->
-        <div class="max-w-7xl mx-auto px-6 mb-8 mt-16">
+    <!-- More Luxury Reels Section -->
+<div class="max-w-7xl mx-auto px-6 mb-8 mt-16">
             <h2 class="text-3xl font-light text-white tracking-wide">
                 More Luxury Reels
             </h2>
@@ -457,26 +448,7 @@
             
             duplicateReelsTrack.appendChild(videoItem);
         });
-// Generate horizontal video gallery
-        const videoTrack = document.getElementById('videoTrack');
-        
-        // Create duplicate videos for seamless infinite scroll
-        const allVideos = [...videoData, ...videoData];
-        
-        allVideos.forEach((video, index) => {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            videoItem.innerHTML = `
-                <video autoplay muted loop playsinline>
-                    <source src="${video.src}" type="video/mp4">
-                </video>
-                <div class="video-glow"></div>
-            `;
-            
-            videoTrack.appendChild(videoItem);
-        });
-        // Category card animations
+// Category card animations
         const categoryCards = document.querySelectorAll('.category-card');
         
         categoryCards.forEach(card => {
