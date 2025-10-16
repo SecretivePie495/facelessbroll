@@ -1,19 +1,407 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>My static Space</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="card">
-			<h1>Welcome to your static Space!</h1>
-			<p>You can modify this app directly by editing <i>index.html</i> in the Files and versions tab.</p>
-			<p>
-				Also don't forget to check the
-				<a href="https://huggingface.co/docs/hub/spaces" target="_blank">Spaces documentation</a>.
-			</p>
-		</div>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Canvas Noir</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #dc2626;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-trail {
+            width: 6px;
+            height: 6px;
+            background: #dc2626;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.7;
+            mix-blend-mode: difference;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem;
+            perspective: 1000px;
+        }
+        
+        .video-tile {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 0 0 1px rgba(220, 38, 38, 0.1),
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(220, 38, 38, 0.05);
+        }
+        
+        .video-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.03), transparent);
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .video-tile:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.05);
+            box-shadow: 
+                0 0 0 1px rgba(220, 38, 38, 0.3),
+                0 25px 50px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(220, 38, 38, 0.2);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            background: #111111;
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.1) brightness(0.9) saturate(1.2);
+        }
+        
+        .glow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(220, 38, 38, 0.1));
+            mix-blend-mode: overlay;
+            z-index: 1;
+        }
+        
+        .neon-border {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid transparent;
+            border-radius: 14px;
+            background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.4), transparent);
+            background-clip: padding-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 0;
+        }
+        
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .title-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .main-title {
+            font-weight: 200;
+            font-size: 4rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+            background: linear-gradient(135deg, #ffffff 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-weight: 300;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="parallax-bg" id="vanta-bg"></div>
+    
+    <div class="title-overlay">
+        <h1 class="main-title">QUANTUM CANVAS</h1>
+        <div class="subtitle">IMMERSIVE DIGITAL REALMS</div>
+    </div>
+    
+    <div class="scroll-indicator">
+        Scroll to Explore
+    </div>
+    
+    <div class="video-grid" id="videoGrid">
+        <!-- Video tiles will be dynamically generated -->
+    </div>
+    
+    <div class="floating-particles" id="particles"></div>
+
+    <script>
+        // Initialize custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const trails = [];
+        
+        for (let i = 0; i < 5; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trails.push({
+                element: trail,
+                x: 0,
+                y: 0,
+                delay: i * 3
+            });
+        }
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            trails.forEach((trail, index) => {
+                setTimeout(() => {
+                    trail.x = e.clientX;
+                    trail.y = e.clientY;
+                    trail.element.style.left = trail.x + 'px';
+                    trail.element.style.top = trail.y + 'px';
+                }, trail.delay);
+            });
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(0.8)';
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+        });
+        
+        // Initialize Vanta.js background
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xdc2626,
+            color2: 0x000000,
+            backgroundColor: 0x000000,
+            size: 1.10
+        });
+        
+        // Video data - using placeholder video URLs
+        const videoData = [
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", title: "Digital Dreamscape" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", title: "Neural Pathways" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", title: "Quantum Flux" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", title: "Virtual Cosmos" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", title: "AI Genesis" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", title: "Data Streams" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4", title: "Cyber Realms" },
+            { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", title: "Digital Alchemy" }
+        ];
+        
+        // Generate video grid
+        const videoGrid = document.getElementById('videoGrid');
+        
+        videoData.forEach((video, index) => {
+            const videoTile = document.createElement('div');
+            videoTile.className = 'video-tile';
+            videoTile.style.animationDelay = `${index * 0.1}s`;
+            
+            videoTile.innerHTML = `
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="${video.src}" type="video/mp4">
+                    </video>
+                    <div class="glow-overlay"></div>
+                    <div class="neon-border"></div>
+                </div>
+            `;
+            
+            videoGrid.appendChild(videoTile);
+            
+            // Add random 3D rotation on hover
+            videoTile.addEventListener('mouseenter', () => {
+                const randomX = (Math.random() - 0.5) * 10;
+                const randomY = (Math.random() - 0.5) * 10;
+                videoTile.style.transform = `translateY(-15px) rotateX(${randomX}deg) rotateY(${randomY}deg) scale(1.08)`;
+            });
+            
+            videoTile.addEventListener('mouseleave', () => {
+                videoTile.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+        
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.parallax-bg');
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            
+            // Fade out title overlay
+            const titleOverlay = document.querySelector('.title-overlay');
+            const opacity = 1 - (scrolled / 300);
+            titleOverlay.style.opacity = Math.max(opacity, 0);
+        });
+        
+        // Particle system
+        const particlesContainer = document.getElementById('particles');
+        const particles = [];
+        
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: #dc2626;
+                border-radius: 50%;
+                opacity: ${Math.random() * 0.5 + 0.1};
+            `;
+            
+            particlesContainer.appendChild(particle);
+            
+            particles.push({
+                element: particle,
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1
+            });
+        }
+        
+        function animateParticles() {
+            particles.forEach(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                
+                if (particle.x < 0 || particle.x > window.innerWidth) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > window.innerHeight) particle.vy *= -1;
+                
+                particle.element.style.left = particle.x + 'px';
+                particle.element.style.top = particle.y + 'px';
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        animateParticles();
+        
+        // Initialize feather icons
+        feather.replace();
+    </script>
+</body>
 </html>
