@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Faceless B-Roll</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 80%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .service-card {
+            background: linear-gradient(145deg, #111111, #1a1a1a);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        .service-icon {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.2));
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="parallax-bg" id="vanta-bg"></div>
+    
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-4xl font-light tracking-tight">
+                <a href="index.html" class="text-white hover:text-red-600 transition">Faceless</a>
+                <a href="index.html" class="text-red-600 hover:text-white transition">B-Roll</a>
+            </div>
+            <div class="flex gap-4">
+                <a href="index.html" class="px-6 py-2 bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+                    Home
+                </a>
+                <a href="https://app.facelessbroll.com/" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20">
+                    Sign Up
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="min-h-screen pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold text-white mb-4">Our Premium Services</h1>
+                <p class="text-xl text-white/60 max-w-3xl mx-auto">
+                    Everything you need to build and grow your faceless brand
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card p-8">
+                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
+                        <i data-feather="film" class="w-8 h-8 text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">4K Luxury Reel Packs</h3>
+                    <p class="text-white/70 mb-6">
+                        Access our exclusive library of premium 4K faceless reels, updated monthly with fresh content across multiple niches.
+                    </p>
+                    <ul class="space-y-2 text-white/80">
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>100+ new reels added monthly</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Multiple niche options</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Commercial use rights</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card p-8">
+                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
+                        <i data-feather="clock" class="w-8 h-8 text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Automated Posting</h3>
+                    <p class="text-white/70 mb-6">
+                        Our AI-powered system handles scheduling, optimization, and distribution of your content automatically.
+                    </p>
+                    <ul class="space-y-2 text-white/80">
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Optimal posting times</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Multi-platform support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Performance analytics</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card p-8">
+                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
+                        <i data-feather="hash" class="w-8 h-8 text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">AI Captions & Hashtags</h3>
+                    <p class="text-white/70 mb-6">
+                        Our AI generates high-converting captions and targeted hashtags to maximize your reach and engagement.
+                    </p>
+                    <ul class="space-y-2 text-white/80">
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Niche-specific hashtags</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Viral caption templates</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Performance tracking</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card p-8">
+                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
+                        <i data-feather="trending-up" class="w-8 h-8 text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Growth Analytics</h3>
+                    <p class="text-white/70 mb-6">
+                        Track your channel's performance with detailed analytics and get personalized growth recommendations.
+                    </p>
+                    <ul class="space-y-2 text-white/80">
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Engagement metrics</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Audience insights</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Content performance</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card p-8">
+                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
+                        <i data-feather="dollar-sign" class="w-8 h-8 text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Monetization Tools</h3>
+                    <p class="text-white/70 mb-6">
+                        Built-in tools to help you monetize your faceless brand through sponsorships, affiliate marketing, and more.
+                    </p>
+                    <ul class="space-y-2 text-white/80">
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Sponsorship matching</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Affiliate program</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Revenue tracking</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card p-8">
+                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
+                        <i data-feather="users" class="w-8 h-8 text-red-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Community & Support</h3>
+                    <p class="text-white/70 mb-6">
+                        Join our exclusive community of faceless creators and get priority support from our team.
+                    </p>
+                    <ul class="space-y-2 text-white/80">
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Private Discord community</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>Weekly Q&A sessions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
+                            <span>24/7 priority support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="py-8 bg-black/90 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="text-white/60 text-xs">
+                &copy; 2023 Faceless B-Roll. All rights reserved.
+                <div class="mt-2">
+                    <a href="privacy.html" class="text-white/40 hover:text-white/60 transition">Privacy Policy</a> 
+                    <span class="mx-2">•</span>
+                    <a href="service.html" class="text-white/40 hover:text-white/60 transition">Our Services</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script>
+        // Initialize feather icons
+        feather.replace();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
