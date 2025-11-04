@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
         
@@ -22,20 +21,26 @@
             color: #ffffff;
             overflow-x: hidden;
         }
-        .service-card {
-            background: linear-gradient(145deg, #111111, #1a1a1a);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            transition: all 0.3s ease;
+        .privacy-container {
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
-            border-color: rgba(220, 38, 38, 0.3);
+        .privacy-section {
+            margin-bottom: 3rem;
         }
-        .service-icon {
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.2));
-            border-radius: 12px;
+        .privacy-title {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .privacy-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #dc2626;
         }
     </style>
 </head>
@@ -46,8 +51,8 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-4xl font-light tracking-tight">
-                <a href="index.html" class="text-white hover:text-red-600 transition">Faceless</a>
-                <a href="index.html" class="text-red-600 hover:text-white transition">B-Roll</a>
+                <a href="index.html" class="text-white hover:text-red-600 transition">Quantum</a>
+                <a href="index.html" class="text-red-600 hover:text-white transition">Canvas</a>
             </div>
             <div class="flex gap-4">
                 <a href="index.html" class="px-6 py-2 bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300">
@@ -61,183 +66,70 @@
     </header>
 
     <main class="min-h-screen pt-32 pb-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h1 class="text-5xl font-bold text-white mb-4">Our Premium Services</h1>
-                <p class="text-xl text-white/60 max-w-3xl mx-auto">
-                    Everything you need to build and grow your faceless brand
+        <div class="privacy-container">
+            <h1 class="text-4xl font-bold text-white mb-8 text-center">Privacy Policy</h1>
+
+            <p class="text-white/70 mb-8 text-center">Last Updated: October 26, 2023</p>
+
+            <div class="privacy-section">
+                <p class="text-white/70 mb-4">
+                    Quantum Canvas ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website, services, and any related applications (collectively, the "Service").
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i data-feather="film" class="w-8 h-8 text-red-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">4K Luxury Reel Packs</h3>
-                    <p class="text-white/70 mb-6">
-                        Access our exclusive library of premium 4K faceless reels, updated monthly with fresh content across multiple niches.
-                    </p>
-                    <ul class="space-y-2 text-white/80">
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>100+ new reels added monthly</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Multiple niche options</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Commercial use rights</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="privacy-section">
+                <h2 class="text-2xl font-semibold text-white privacy-title">1. Information We Collect</h2>
+                <p class="text-white/70 mb-4">
+                    We may collect information about you in a variety of ways:
+                </p>
+                <ul class="text-white/70 list-disc pl-6 space-y-2">
+                    <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, email address, Instagram account details (token), and niche preferences that you voluntarily give to us when you register with the Service or choose to participate in various activities related to the Service.</li>
+                    <li><strong>Derivative Data:</strong> Information our servers automatically collect when you access the Service, such as your IP address, browser type, operating system, access times, and the pages you have viewed directly before and after accessing the Service.</li>
+                    <li><strong>Financial Data:</strong> Information related to your payment method (e.g., valid credit card number, card brand, expiration date) that we may collect when you purchase, order, return, exchange, or request information about our services from the Service.</li>
+                </ul>
+            </div>
 
-                <!-- Service 2 -->
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i data-feather="clock" class="w-8 h-8 text-red-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Automated Posting</h3>
-                    <p class="text-white/70 mb-6">
-                        Our AI-powered system handles scheduling, optimization, and distribution of your content automatically.
-                    </p>
-                    <ul class="space-y-2 text-white/80">
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Optimal posting times</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Multi-platform support</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Performance analytics</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="privacy-section">
+                <h2 class="text-2xl font-semibold text-white privacy-title">2. How We Use Your Information</h2>
+                <p class="text-white/70 mb-4">
+                    We use information collected about you for purposes such as:
+                </p>
+                <ul class="text-white/70 list-disc pl-6 space-y-2">
+                    <li>To create and manage your account.</li>
+                    <li>To enable user-to-user communications.</li>
+                    <li>To generate and provide reel content based on your preferences.</li>
+                    <li>To process payments and refunds.</li>
+                    <li>To improve our Service, user experience, and features.</li>
+                    <li>To send you updates, newsletters, and promotional communications.</li>
+                    <li>To monitor and analyze usage and trends to improve your experience with the Service.</li>
+                </ul>
+            </div>
 
-                <!-- Service 3 -->
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i data-feather="hash" class="w-8 h-8 text-red-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">AI Captions & Hashtags</h3>
-                    <p class="text-white/70 mb-6">
-                        Our AI generates high-converting captions and targeted hashtags to maximize your reach and engagement.
-                    </p>
-                    <ul class="space-y-2 text-white/80">
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Niche-specific hashtags</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Viral caption templates</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Performance tracking</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="privacy-section">
+                <h2 class="text-2xl font-semibold text-white privacy-title">3. Disclosure of Your Information</h2>
+                <p class="text-white/70 mb-4">
+                    We may share information we have collected about you in certain situations:
+                </p>
+                <ul class="text-white/70 list-disc pl-6 space-y-2">
+                    <li><strong>By Law or to Protect Rights:</strong> If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation.</li>
+                    <li><strong>Third-Party Service Providers:</strong> We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.</li>
+                </ul>
+            </div>
 
-                <!-- Service 4 -->
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i data-feather="trending-up" class="w-8 h-8 text-red-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Growth Analytics</h3>
-                    <p class="text-white/70 mb-6">
-                        Track your channel's performance with detailed analytics and get personalized growth recommendations.
-                    </p>
-                    <ul class="space-y-2 text-white/80">
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Engagement metrics</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Audience insights</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Content performance</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="privacy-section">
+                <h2 class="text-2xl font-semibold text-white privacy-title">4. Security of Your Information</h2>
+                <p class="text-white/70 mb-4">
+                    We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
+                </p>
+            </div>
 
-                <!-- Service 5 -->
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i data-feather="dollar-sign" class="w-8 h-8 text-red-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Monetization Tools</h3>
-                    <p class="text-white/70 mb-6">
-                        Built-in tools to help you monetize your faceless brand through sponsorships, affiliate marketing, and more.
-                    </p>
-                    <ul class="space-y-2 text-white/80">
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Sponsorship matching</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Affiliate program</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Revenue tracking</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="service-card p-8">
-                    <div class="service-icon w-16 h-16 flex items-center justify-center mb-6">
-                        <i data-feather="users" class="w-8 h-8 text-red-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Community & Support</h3>
-                    <p class="text-white/70 mb-6">
-                        Join our exclusive community of faceless creators and get priority support from our team.
-                    </p>
-                    <ul class="space-y-2 text-white/80">
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Private Discord community</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>Weekly Q&A sessions</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span>24/7 priority support</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="privacy-section">
+                <h2 class="text-2xl font-semibold text-white privacy-title">5. Contact Us</h2>
+                <p class="text-white/70 mb-4">
+                    If you have questions or comments about this Privacy Policy, please contact us at: <strong>support@quantumcanvas.com</strong>
+                </p>
             </div>
         </div>
     </main>
-    <footer class="py-8 bg-black/90 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="text-white/60 text-xs">
-                &copy; 2023 Faceless B-Roll. All rights reserved.
-                <div class="mt-2">
-                    <a href="privacy.html" class="text-white/40 hover:text-white/60 transition">Privacy Policy</a> 
-                    <span class="mx-2">•</span>
-                    <a href="service.html" class="text-white/40 hover:text-white/60 transition">Our Services</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-<script>
-        // Initialize feather icons
-        feather.replace();
-    </script>
-    <script src="script.js"></script>
 </body>
 </html>
