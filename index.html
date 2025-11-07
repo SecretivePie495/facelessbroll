@@ -347,10 +347,10 @@
 <!-- Email Signup Section -->
 <section class="py-20 bg-black relative" style="margin: 0 auto; max-width: 80vw;">
   <script>
-    function showPopup(message, type = "success") {
+    // Simple non-animated popup
+    function showPopup(message, type = "success", ms = 3000) {
       const popup = document.createElement("div");
       popup.textContent = message;
-
       Object.assign(popup.style, {
         position: "fixed",
         bottom: "40px",
@@ -367,36 +367,45 @@
         opacity: "1",
         transition: "opacity 0.4s ease"
       });
-
       document.body.appendChild(popup);
-
-      // Fade out after a few seconds
-      setTimeout(() => {
-        popup.style.opacity = "0";
-        setTimeout(() => popup.remove(), 400);
-      }, 3000);
+      setTimeout(() => { popup.style.opacity = "0"; setTimeout(() => popup.remove(), 400); }, ms);
     }
 
-    function handleSignup() {
-      const name = document.getElementById("signup-name").value.trim();
-      const email = document.getElementById("signup-email").value.trim();
+    async function handleSignup() {
+      const nameInput = document.getElementById('signup-name');
+      const emailInput = document.getElementById('signup-email');
+      const name = nameInput?.value?.trim();
+      const email = emailInput?.value?.trim();
 
-      if (!name) {
-        showPopup("Please enter your first name.", "error");
-        return;
+      if (!name) { showPopup("Please enter your name.", "error"); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showPopup("Please enter a valid email address.", "error"); return;
       }
 
-      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
-        showPopup("Please enter a valid email address.", "error");
-        return;
+      try {
+        const res = await fetch('/api/forward-to-make', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            timestamp: new Date().toISOString(),
+            source: 'Faceless B-Roll'
+          })
+        });
+
+        if (res.ok) {
+          showPopup("Thank you for signing up! We'll be in touch soon.", "success");
+          nameInput.value = '';
+          emailInput.value = '';
+        } else {
+          console.error('Server error:', res.status, await res.text());
+          showPopup('There was an error with your signup. Please try again.', 'error');
+        }
+      } catch (err) {
+        console.error('Network error:', err);
+        showPopup('There was a connection error. Please try again.', 'error');
       }
-
-      // Here you can add your backend request logic later (Make webhook, etc.)
-      showPopup(`✅ Thank you, ${name}! We'll be in touch soon.`, "success");
-
-      // Clear inputs
-      document.getElementById("signup-name").value = "";
-      document.getElementById("signup-email").value = "";
     }
   </script>
 
@@ -409,19 +418,19 @@
         Enter your name and email to create your account and begin your journey to automated success.
       </p>
     </div>
-    <div class="max-w-2xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+    <div class="max-w-xl mx-auto">
+      <div class="flex gap-4 justify-center items-center flex-wrap">
         <input
           type="text"
           id="signup-name"
-          placeholder="First Name"
-          class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300"
+          placeholder="Enter your name"
+          class="w-full md:flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
         />
         <input
           type="email"
           id="signup-email"
           placeholder="Enter your email address"
-          class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300"
+          class="w-full md:flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
         />
         <button
           onclick="handleSignup()"
