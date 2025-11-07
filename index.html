@@ -347,98 +347,20 @@
 <!-- Email Signup Section -->
 <section class="py-20 bg-black relative" style="margin: 0 auto; max-width: 80vw;">
   <script>
-    // Prevent the section from being shown in an embedded preview frame
+    // Prevent embedded preview frames
     if (window.top !== window.self) {
       window.top.location = window.location.href;
     }
 
-    // Function to show an on-page popup message
+    // Show sliding popup message (black + red theme)
     function showMessage(text, type = "success") {
       const msg = document.createElement("div");
       msg.textContent = text;
       msg.style.position = "fixed";
-      msg.style.bottom = "40px";
+      msg.style.bottom = "-60px";
       msg.style.left = "50%";
       msg.style.transform = "translateX(-50%)";
-      msg.style.padding = "16px 28px";
-      msg.style.borderRadius = "12px";
-      msg.style.fontSize = "18px";
-      msg.style.zIndex = "9999";
-      msg.style.transition = "opacity 0.4s ease";
-      msg.style.backgroundColor = type === "success" ? "#111" : "#500";
-      msg.style.color = type === "success" ? "#ff2e2e" : "#fff";
-      msg.style.border = "1px solid rgba(255,0,0,0.3)";
-      msg.style.boxShadow = "0 0 20px rgba(255,0,0,0.2)";
-      document.body.appendChild(msg);
-
-      // Fade out after 3 seconds
-      setTimeout(() => {
-        msg.style.opacity = "0";
-        setTimeout(() => msg.remove(), 400);
-      }, 3000);
-    }
-
-    async function handleSignup() {
-      const input = document.getElementById('signup-email');
-      const email = input?.value?.trim();
-
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showMessage('Please enter a valid email address.', 'error');
-        return;
-      }
-
-      try {
-        const res = await fetch('/api/forward-to-make', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            timestamp: new Date().toISOString(),
-            source: 'Faceless B-Roll'
-          })
-        });
-
-        if (res.ok) {
-          showMessage("✅ Thank you for signing up! We'll be in touch soon.", 'success');
-          input.value = '';
-        } else {
-          console.error('Server error:', res.status, await res.text());
-          showMessage('There was an error with your signup. Please try again.', 'error');
-        }
-      } catch (err) {
-        console.error('Network error:', err);
-        showMessage('There was a connection error. Please try again.', 'error');
-      }
-    }
-  </script>
-
-  <div class="max-w-4xl mx-auto px-6 text-center">
-    <div class="text-center mb-10">
-      <h2 class="text-5xl font-light mb-4 text-white">
-        Get Your First 20 Reels Free
-      </h2>
-      <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8">
-        Enter your email to create your account and begin your journey to automated success.
-      </p>
-    </div>
-    <div class="max-w-xl mx-auto">
-      <div class="flex gap-4 justify-center items-center">
-        <input
-          type="email"
-          id="signup-email"
-          placeholder="Enter your email address"
-          class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
-        />
-        <button
-          onclick="handleSignup()"
-          class="px-8 py-4 bg-red-700 text-white text-lg rounded-xl hover:bg-red-800 transition-all duration-300 shadow-lg shadow-red-600/20"
-        >
-          Sign Up
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+      msg.style
 
 
 
