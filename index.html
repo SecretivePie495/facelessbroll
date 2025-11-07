@@ -1,353 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faceless B-Roll</title>
-    <link rel="icon" type="image/png" href="logo/favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-<style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 80%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-/* Horizontal Scroll Gallery */
-        .horizontal-scroll-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .horizontal-scroll-track {
-            display: flex;
-            gap: 1.5rem;
-            padding: 0 2rem;
-            animation: scroll-horizontal 40s linear infinite;
-        }
-        
-        .horizontal-scroll-track:hover {
-            animation-play-state: paused;
-        }
-        .video-item {
-            flex: 0 0 auto;
-            width: 280px;
-            height: 497px;
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            background: #111;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.1),
-                0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-.video-item:hover {
-            transform: scale(1.05);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.3),
-                0 20px 40px rgba(0, 0, 0, 0.8),
-                0 0 60px rgba(220, 38, 38, 0.2);
-        }
-        
-        .video-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: contrast(1.1) brightness(0.9) saturate(1.2);
-        }
-        
-        .video-glow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 40%, rgba(220, 38, 38, 0.08);
-            mix-blend-mode: overlay;
-            pointer-events: none;
-        }
-        @keyframes scroll-horizontal {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(-280px * 10 - 1.5rem * 10));
-            }
-        }
-.custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #dc2626;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.2s ease;
-        }
-        
-        .cursor-trail {
-            width: 6px;
-            height: 6px;
-            background: #dc2626;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.7;
-            mix-blend-mode: difference;
-        }
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            padding: 4rem;
-            perspective: 1000px;
-            justify-items: center;
-        }
-.video-tile {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.1),
-                0 10px 30px rgba(0, 0, 0, 0.5),
-                0 0 50px rgba(220, 38, 38, 0.05);
-        }
-.video-tile::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.03), transparent);
-            z-index: 2;
-            pointer-events: none;
-        }
-        .video-tile:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.05);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.3),
-                0 25px 50px rgba(0, 0, 0, 0.8),
-                0 0 80px rgba(220, 38, 38, 0.2);
-        }
-        
-        /* Category Cards */
-        .category-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 350px;
-            width: 350px;
-            background: #111;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.1),
-                0 10px 30px rgba(0, 0, 0, 0.5);
-            margin: 0 auto;
-        }
-.category-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 0 0 1px rgba(220, 38, 38, 0.3),
-                0 20px 40px rgba(0, 0, 0, 0.8),
-                0 0 60px rgba(220, 38, 38, 0.2);
-        }
-        .category-card .video-container {
-            height: 100%;
-            width: 100%;
-            padding-bottom: 0;
-        }
-        
-        .category-card .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: contrast(1.2) brightness(0.8) saturate(1.3);
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #111111;
-        }
-        
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: contrast(1.1) brightness(0.9) saturate(1.2);
-        }
-.glow-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 30%, rgba(220, 38, 38, 0.1));
-            mix-blend-mode: overlay;
-            z-index: 1;
-        }
-        
-        .neon-border {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border: 2px solid transparent;
-            border-radius: 14px;
-            background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.4), transparent);
-            background-clip: padding-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            z-index: 0;
-        }
-.title-overlay {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 100;
-            pointer-events: none;
-        }
-        
-        .main-title {
-            font-weight: 200;
-            font-size: 4rem;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
-            background: linear-gradient(135deg, #ffffff 0%, #dc2626 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle {
-            font-weight: 300;
-            font-size: 1.2rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .scroll-indicator {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-        
-        .parallax-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
-        
-        @media (max-width: 768px) {
-            .video-grid {
-                grid-template-columns: 1fr;
-                padding: 2rem;
-                gap: 1.5rem;
-            }
-            
-            .main-title {
-                font-size: 2.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faceless B-Roll</title>
+  <link rel="icon" type="image/png" href="logo/favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at center, #0a0a0a 0%, #000000 80%);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* Horizontal Scroll Gallery (manual scroll + snap) */
+    .horizontal-scroll-container{
+      width:100%;
+      overflow-x:auto;                 /* horizontal scroll only in this band */
+      overflow-y:visible;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type:x mandatory;
+      padding: 0 2rem 1rem 2rem;
+      mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+    }
+    .horizontal-scroll-track{
+      display:flex;
+      gap:1.5rem;
+    }
+    .video-item{
+      flex:0 0 auto;                   /* keep items side-by-side */
+      width:280px;
+      height:497px;
+      border-radius:16px;
+      overflow:hidden;
+      position:relative;
+      background:#111;
+      transition:all .3s cubic-bezier(.4,0,.2,1);
+      box-shadow:
+        0 0 0 1px rgba(220,38,38,.1),
+        0 10px 30px rgba(0,0,0,.5);
+      scroll-snap-align:start;         /* snap each card neatly */
+    }
+    .video-item:hover{
+      transform:scale(1.05);
+      box-shadow:
+        0 0 0 1px rgba(220,38,38,.3),
+        0 20px 40px rgba(0,0,0,.8),
+        0 0 60px rgba(220,38,38,.2);
+    }
+    .video-item video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:contrast(1.1) brightness(.9) saturate(1.2);
+    }
+    .video-glow{
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(220, 38, 38, 0.08)); /* fixed missing ) */
+      mix-blend-mode: overlay;
+      pointer-events:none;
+    }
+
+    /* Cursor flair */
+    .custom-cursor {
+      width: 20px; height: 20px;
+      border: 2px solid #dc2626; border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.2s ease;
+    }
+    .cursor-trail {
+      width: 6px; height: 6px; background: #dc2626; border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9998; opacity: 0.7; mix-blend-mode: difference;
+    }
+
+    /* Grid (kept for non-scrolling sections if needed later) */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem; padding: 4rem; perspective: 1000px; justify-items: center;
+    }
+    .video-tile {
+      position: relative; border-radius: 16px; overflow: hidden; transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow:
+        0 0 0 1px rgba(220, 38, 38, 0.1),
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 50px rgba(220, 38, 38, 0.05);
+    }
+    .video-tile:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.05);
+      box-shadow:
+        0 0 0 1px rgba(220, 38, 38, 0.3),
+        0 25px 50px rgba(0, 0, 0, 0.8),
+        0 0 80px rgba(220, 38, 38, 0.2);
+    }
+
+    .parallax-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+
+    @media (max-width: 768px) {
+      .video-grid { grid-template-columns: 1fr; padding: 2rem; gap: 1.5rem; }
+    }
+
+    /* Optional: subtle scrollbar styling (WebKit) */
+    .horizontal-scroll-container::-webkit-scrollbar{ height:10px; }
+    .horizontal-scroll-container::-webkit-scrollbar-thumb{ background:#1f1f1f; border-radius:8px; }
+    .horizontal-scroll-container::-webkit-scrollbar-track{ background:transparent; }
+  </style>
 </head>
+
 <body>
-    <div class="custom-cursor"></div>
-    <div class="parallax-bg" id="vanta-bg"></div>
-    <!-- Header - Clean and Modern -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-4xl font-light tracking-tight">
-                <span class="text-white">Faceless</span>
-                <span class="text-red-600">B-Roll</span>
+  <div class="custom-cursor"></div>
+  <div class="parallax-bg" id="vanta-bg"></div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-4xl font-light tracking-tight">
+        <span class="text-white">Faceless</span>
+        <span class="text-red-600">B-Roll</span>
+      </div>
+      <div class="flex gap-4">
+        <button class="px-6 py-2 bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300" onclick="window.location.href='https://app.facelessbroll.com/'">
+          Login
+        </button>
+        <button class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20" onclick="window.location.href='https://app.facelessbroll.com/'">
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="min-h-screen py-20 bg-black/50 mt-32">
+    <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
+      <h2 class="text-4xl font-bold tracking-wide uppercase mb-4">
+        Build a $10K/Month Faceless Brand in 90 Days
+      </h2>
+      <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8">
+        Get ready-made 4K luxury reels + a fully automated posting system that grows your audience on autopilot.
+      </p>
+    </div>
+  </section>
+
+  <!-- Luxury 4K Reels Section -->
+  <section class="py-20 bg-black/50">
+    <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
+      <h2 class="text-4xl font-bold tracking-wide uppercase mb-4">4K Faceless Luxury Reels</h2>
+    </div>
+    <div class="horizontal-scroll-container">
+      <div class="horizontal-scroll-track" id="additionalReelsTrack">
+        <!-- dynamically populated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Email Signup Section -->
+  <section class="py-20 bg-black relative" style="margin: 0 auto; max-width: 80vw;">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="text-center mb-10">
+        <h2 class="text-5xl font-light mb-4 text-white">Get Your First 20 Reels Free</h2>
+        <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8">
+          Enter your name and email to create your account and begin your journey to automated success.
+        </p>
+      </div>
+      <div class="max-w-xl mx-auto">
+        <div class="flex gap-4 justify-center items-center flex-wrap">
+          <input
+            type="text" id="signup-name" placeholder="Enter your name"
+            class="w-full md:flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"/>
+          <input
+            type="email" id="signup-email" placeholder="Enter your email address"
+            class="w-full md:flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"/>
+          <button onclick="handleSignup()"
+            class="px-8 py-4 bg-red-700 text-white text-lg rounded-xl hover:bg-red-800 transition-all duration-300 shadow-lg shadow-red-600/20">
+            Sign Up
+          </button>
         </div>
-        <div class="flex gap-4">
-            <button class="px-6 py-2 bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300" onclick="window.location.href='https://app.facelessbroll.com/'">
-                Login
-            </button>
-            <button class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20" onclick="window.location.href='https://app.facelessbroll.com/'">
-                Sign Up
-            </button>
-</div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-<section class="min-h-screen py-20 bg-black/50 mt-32">
-        <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
-            <h2 class="text-4xl font-bold text-white-600 tracking-wide uppercase mb-4">
-                Build a $10K/Month Faceless Brand in 90 Days
-                
-               </h2>
-                <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8">
-                Get ready-made 4K luxury reels + a fully automated posting system that grows your audience on autopilot. 
-                </p>
-            </div>
+  <!-- More Luxury Reels (Horizontal) -->
+  <section class="py-8 bg-black">
+    <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
+      <h2 class="text-4xl font-bold text-white tracking-wide uppercase">
+        Immediate Ready To Post Reels
+      </h2>
+    </div>
+    <div class="horizontal-scroll-container">
+      <div class="horizontal-scroll-track" id="moreReelsTrack">
+        <!-- dynamically populated -->
+      </div>
+    </div>
+  </section>
 
-<!-- Luxury 4K Reels Section -->
-<section class="min-h-screen py-20 bg-black/50 mt-32">
-        <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
-            <h2 class="text-4xl font-bold text-white-600 tracking-wide uppercase mb-4">
-                4K Faceless Luxury Reels
-               </h2>
-
-                </p>
-            </div>
-<div class="horizontal-scroll-container">
-        <div class="horizontal-scroll-track" id="additionalReelsTrack">
-            <!-- Additional reels will be dynamically generated -->
+  <!-- How It Works -->
+  <section class="py-20 bg-black relative">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-4xl font-light mb-4 text-white">How It Works</h2>
+        <p class="text-lg text-white/60 max-w-2xl mx-auto">Transform your digital presence in three simple steps</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+        <div class="group relative">
+          <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10">
+            <div class="text-4xl font-light text-red-600 mb-4">01</div>
+            <h3 class="text-xl font-light text-white mb-4">Choose Your Niche & Reel Pack</h3>
+            <p class="text-white/60 leading-relaxed">Select from curated premium reel packs tailored to your audience.</p>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
         </div>
-    </section>
-    
-<!-- Email Signup Section -->
-<section class="py-20 bg-black relative" style="margin: 0 auto; max-width: 80vw;">
+
+        <div class="group relative">
+          <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10">
+            <div class="text-4xl font-light text-red-600 mb-4">02</div>
+            <h3 class="text-xl font-light text-white mb-4">Automate Posts with AI</h3>
+            <p class="text-white/60 leading-relaxed">Scheduling, optimization, and distribution handled automatically.</p>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+        </div>
+
+        <div class="group relative">
+          <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10">
+            <div class="text-4xl font-light text-red-600 mb-4">03</div>
+            <h3 class="text-xl font-light text-white mb-4">Grow Your Faceless Brand</h3>
+            <p class="text-white/60 leading-relaxed">Watch your audience grow while maintaining anonymity.</p>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-20 bg-black relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-light mb-4 text-white">Choose Your Plan</h2>
+        <p class="text-lg text-white/60 max-w-2xl mx-auto">Simple, transparent pricing to fit your growth needs</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Starter -->
+        <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10 group">
+          <div class="mb-6">
+            <h3 class="text-2xl font-light text-white mb-2">Starter</h3>
+            <p class="text-white/60">Perfect for beginners</p>
+          </div>
+          <div class="mb-8">
+            <span class="text-5xl font-light text-white">$7.99</span>
+            <span class="text-white/60">/month</span>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — 50 Premium Reels/Month</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — 1 Connected Account</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — 5 videos posted weekly</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — 25 Videos to choose from</span></li>
+          </ul>
+          <a href="https://buy.stripe.com/test_eVqeVfc2z4Fj9dZ1drdby03" class="block w-full py-3 px-6 text-center bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+            Get Started
+          </a>
+        </div>
+
+        <!-- Pro -->
+        <div class="bg-gradient-to-br from-gray-900 to-black border-2 border-red-600/50 rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-red-600/20 group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+          <div class="mb-6">
+            <h3 class="text-2xl font-light text-white mb-2">Pro</h3>
+            <p class="text-white/60">For serious creators</p>
+          </div>
+          <div class="mb-8">
+            <span class="text-5xl font-light text-white">$14.99</span>
+            <span class="text-white/60">/month</span>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — 30 Premium Reels per month</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — Choose 2 Niches</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — AI Captions & Hashtags</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — Up to 2 Connected Channels</span></li>
+          </ul>
+          <a href="https://buy.stripe.com/test_14A7sN0jR4Fj75R8FTdby04" class="block w-full py-3 px-6 text-center bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300">
+            Get Started
+          </a>
+        </div>
+
+        <!-- Growth -->
+        <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10 group">
+          <div class="mb-6">
+            <h3 class="text-2xl font-light text-white mb-2">Growth</h3>
+            <p class="text-white/60">For teams & businesses</p>
+          </div>
+          <div class="mb-8">
+            <span class="text-5xl font-light text-white">$49</span>
+            <span class="text-white/60">/month</span>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — 150 Premium per month</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — Unlimited Niches</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — Captions & Hashtags</span></li>
+            <li class="flex items-center text-white/80"><i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i><span> — 200 Videos to choose from</span></li>
+          </ul>
+          <a href="https://buy.stripe.com/test_4gM7sNfeLdbP2PBg8ldby05" class="block w-full py-3 px-6 text-center bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+            Get Started
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-black text-white border-t border-white/10">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 tracking-wide uppercase">Frequently Asked Questions</h2>
+
+      <div class="space-y-4">
+        <!-- Q1 -->
+        <div class="border border-white/10 rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300" onclick="toggleFAQ(this)">
+            <span class="text-lg font-semibold text-red-600">What is UTG Labs?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+            UTG Labs is an automation platform that helps creators build faceless content channels using ready-to-post luxury 4K reels, automated scheduling, and AI-driven branding tools.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="border border-white/10 rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300" onclick="toggleFAQ(this)">
+            <span class="text-lg font-semibold text-red-600">Do I need to show my face to use it?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+            No — UTG Labs is designed for faceless creators. You can build a complete personal or business brand without appearing on camera and start making money.
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="border border-white/10 rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300" onclick="toggleFAQ(this)">
+            <span class="text-lg font-semibold text-red-600">What platforms can I post to?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+            You can automate content for Instagram Reels, YouTube Shorts, and TikTok (coming soon).
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="border border-white/10 rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300" onclick="toggleFAQ(this)">
+            <span class="text-lg font-semibold text-red-600">Can I upload my own reels?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+            Yes. You can upload your own content, mix it with UTG Labs’ 4K reel packs, and manage everything from one dashboard.
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="border border-white/10 rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300" onclick="toggleFAQ(this)">
+            <span class="text-lg font-semibold text-red-600">Is there a free trial?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
+            Yes — start free with your first 20 reels to experience the automation tools before upgrading.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-black/90 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="text-white/60 text-xs mb-6">
+        &copy; 2025 Faceless B-Roll. All rights reserved.
+        <div class="mt-2">
+          <a href="privacy.html" class="text-white/40 hover:text-white/60 transition">Privacy Policy</a>
+          <span class="mx-2">•</span>
+          <a href="agreement.html" class="text-white/40 hover:text-white/60 transition">Terms and Services</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
   <script>
-    // Simple non-animated popup
+    // Simple popup
     function showPopup(message, type = "success", ms = 3000) {
       const popup = document.createElement("div");
       popup.textContent = message;
@@ -370,32 +419,26 @@
       document.body.appendChild(popup);
       setTimeout(() => { popup.style.opacity = "0"; setTimeout(() => popup.remove(), 400); }, ms);
     }
-        async function handleSignup() {
-          const nameInput = document.getElementById('signup-name');
-          const emailInput = document.getElementById('signup-email');
-          const name = nameInput?.value?.trim();
-          const email = emailInput?.value?.trim();
 
-          if (!name) { showPopup("Please enter your name.", "error"); return; }
-          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            showPopup("Please enter a valid email address.", "error"); return;
-          }
-          try {
-            const res = await
-            fetch('https://hook.us1.make.com/hif1y4tjjturtyth2q1j87phccnnuvne', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                name: name,
-                email: email,
-                timestamp: new Date().toISOString(),
-                source: 'Faceless B-Roll'
-              })
-            });
-if (res.ok) {
+    async function handleSignup() {
+      const nameInput = document.getElementById('signup-name');
+      const emailInput = document.getElementById('signup-email');
+      const name = nameInput?.value?.trim();
+      const email = emailInput?.value?.trim();
+
+      if (!name) { showPopup("Please enter your name.", "error"); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showPopup("Please enter a valid email address.", "error"); return;
+      }
+      try {
+        const res = await fetch('https://hook.us1.make.com/hif1y4tjjturtyth2q1j87phccnnuvne', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, timestamp: new Date().toISOString(), source: 'Faceless B-Roll' })
+        });
+        if (res.ok) {
           showPopup("Thank you for signing up! We'll be in touch soon.", "success");
-          nameInput.value = '';
-          emailInput.value = '';
+          nameInput.value = ''; emailInput.value = '';
         } else {
           console.error('Server error:', res.status, await res.text());
           showPopup('There was an error with your signup. Please try again.', 'error');
@@ -405,560 +448,113 @@ if (res.ok) {
         showPopup('There was a connection error. Please try again.', 'error');
       }
     }
+
+    // Custom cursor
+    const cursor = document.querySelector('.custom-cursor');
+    const trails = [];
+    for (let i = 0; i < 5; i++) {
+      const trail = document.createElement('div');
+      trail.className = 'cursor-trail';
+      document.body.appendChild(trail);
+      trails.push({ element: trail, x: 0, y: 0, delay: i * 3 });
+    }
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      trails.forEach((trail) => {
+        setTimeout(() => {
+          trail.x = e.clientX; trail.y = e.clientY;
+          trail.element.style.left = trail.x + 'px';
+          trail.element.style.top = trail.y + 'px';
+        }, trail.delay);
+      });
+    });
+    document.addEventListener('mousedown', () => { cursor.style.transform = 'scale(0.8)'; });
+    document.addEventListener('mouseup',   () => { cursor.style.transform = 'scale(1)';   });
+
+    // Parallax + title guard
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelector('.parallax-bg');
+      if (parallax) parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+      const titleOverlay = document.querySelector('.title-overlay');
+      if (titleOverlay){
+        const opacity = 1 - (scrolled / 300);
+        titleOverlay.style.opacity = Math.max(opacity, 0);
+      }
+    });
+
+    // Data
+    const videoData4k = [
+      { src: "https://storage.googleapis.com/facelessbroll_website/instagram_C4dyNz9Nbdk_mute.mp4", title: "Digital Dreamscape" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/VID_20250905_221249_093.mp4", title: "Neural Pathways" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/318020133_244456238648375_4691320352052561618_n(1).mp4", title: "Quantum Flux" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/-237407181909170842.MP4", title: "Virtual Cosmos" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle135.mp4", title: "AI Genesis" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/Auto885%202.mp4", title: "Data Streams" }
+    ];
+    const videoDataLuxury = [
+      { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle563.mp4", title: "Luxury Dreams" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle265.mp4", title: "Elegant Vision" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle219.mp4", title: "Premium Glow" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle482.mp4", title: "Exclusive Escape" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/instagram_C1k1CK0oive_mute.mp4", title: "Opulent Joy" },
+      { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle554.mp4", title: "Lavish Moments" }
+    ];
+
+    // Populate horizontal strips
+    function populateStrip(trackEl, list) {
+      const all = [...list, ...list]; // duplicate for length
+      all.forEach(video => {
+        const el = document.createElement('div');
+        el.className = 'video-item';
+        el.innerHTML = `
+          <video autoplay muted loop playsinline>
+            <source src="${video.src}" type="video/mp4">
+          </video>
+          <div class="video-glow"></div>
+        `;
+        trackEl.appendChild(el);
+      });
+    }
+    const additionalReelsTrack = document.getElementById('additionalReelsTrack');
+    const moreReelsTrack = document.getElementById('moreReelsTrack');
+    if (additionalReelsTrack) populateStrip(additionalReelsTrack, videoData4k);
+    if (moreReelsTrack)       populateStrip(moreReelsTrack, videoDataLuxury);
+
+    // Convert vertical wheel to horizontal when hovering a strip (desktop nicety)
+    document.querySelectorAll('.horizontal-scroll-container').forEach(container=>{
+      container.addEventListener('wheel', (e)=>{
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+          container.scrollLeft += e.deltaY;
+          e.preventDefault();
+        }
+      }, { passive:false });
+    });
+
+    // FAQ toggle
+    function toggleFAQ(button) {
+      const answer = button.nextElementSibling;
+      const svg = button.querySelector("svg");
+      const isOpen = answer.classList.contains("max-h-96");
+
+      // Close others
+      document.querySelectorAll(".space-y-4 .max-h-96").forEach(el => el.classList.replace("max-h-96", "max-h-0"));
+      document.querySelectorAll(".space-y-4 button svg.rotate-180").forEach(icon => icon.classList.remove("rotate-180"));
+
+      // Toggle selected
+      if (!isOpen) {
+        answer.classList.replace("max-h-0", "max-h-96");
+        svg.classList.add("rotate-180");
+      } else {
+        answer.classList.replace("max-h-96", "max-h-0");
+        svg.classList.remove("rotate-180");
+      }
+    }
+    window.toggleFAQ = toggleFAQ;
+
+    // Feather icons
+    document.addEventListener('DOMContentLoaded', ()=> feather.replace());
   </script>
-
-  <div class="max-w-4xl mx-auto px-6 text-center">
-    <div class="text-center mb-10">
-      <h2 class="text-5xl font-light mb-4 text-white">
-        Get Your First 20 Reels Free
-      </h2>
-      <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8">
-        Enter your name and email to create your account and begin your journey to automated success.
-      </p>
-    </div>
-    <div class="max-w-xl mx-auto">
-      <div class="flex gap-4 justify-center items-center flex-wrap">
-        <input
-          type="text"
-          id="signup-name"
-          placeholder="Enter your name"
-          class="w-full md:flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
-        />
-        <input
-          type="email"
-          id="signup-email"
-          placeholder="Enter your email address"
-          class="w-full md:flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
-        />
-        <button
-          onclick="handleSignup()"
-          class="px-8 py-4 bg-red-700 text-white text-lg rounded-xl hover:bg-red-800 transition-all duration-300 shadow-lg shadow-red-600/20"
-        >
-          Sign Up
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- More Luxury Reels Section - Reduced Spacing -->
-<section class="py-8 bg-black">
-  <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
-    <h2 class="text-4xl font-bold text-white tracking-wide uppercase">
-      immediate Ready To Post Reels
-    </h2>
-  </div>
-  <div class="horizontal-scroll-container">
-    <div class="horizontal-scroll-track" id="moreReelsTrack">
-      <!-- More reels will be dynamically generated -->
-    </div>
-  </div>
-</section>
-
-<!-- How It Works Section -->
-    <section class="py-20 bg-black relative">
-<div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-8">
-<h2 class="text-4xl font-light mb-4 text-white">
-                    How It Works
-                </h2>
-                <p class="text-lg text-white/60 max-w-2xl mx-auto">
-                    Transform your digital presence in three simple steps
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-<!-- Step 1 -->
-                <div class="group relative">
-                    <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10">
-                        <div class="text-4xl font-light text-red-600 mb-4">01</div>
-                        <h3 class="text-xl font-light text-white mb-4">Choose Your Niche & Reel Pack</h3>
-                        <p class="text-white/60 leading-relaxed">
-                            Select from our curated collection of premium reel packs tailored to your specific niche and audience.
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                </div>
-                
-                <!-- Step 2 -->
-                <div class="group relative">
-                    <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10">
-                        <div class="text-4xl font-light text-red-600 mb-4">02</div>
-                        <h3 class="text-xl font-light text-white mb-4">Automate Posts with AI</h3>
-                        <p class="text-white/60 leading-relaxed">
-                            Our intelligent AI system handles scheduling, optimization, and content distribution automatically.
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                </div>
-                
-                <!-- Step 3 -->
-                <div class="group relative">
-                    <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10">
-                        <div class="text-4xl font-light text-red-600 mb-4">03</div>
-                        <h3 class="text-xl font-light text-white mb-4">Grow Your Faceless Brand</h3>
-                        <p class="text-white/60 leading-relaxed">
-                            Watch your audience grow while maintaining complete anonymity and brand consistency.
-                        </p>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-<script>
-// Initialize custom cursor
-        const cursor = document.querySelector('.custom-cursor');
-        const trails = [];
-        
-        for (let i = 0; i < 5; i++) {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            document.body.appendChild(trail);
-            trails.push({
-                element: trail,
-                x: 0,
-                y: 0,
-                delay: i * 3
-            });
-        }
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            trails.forEach((trail, index) => {
-                setTimeout(() => {
-                    trail.x = e.clientX;
-                    trail.y = e.clientY;
-                    trail.element.style.left = trail.x + 'px';
-                    trail.element.style.top = trail.y + 'px';
-                }, trail.delay);
-            });
-        });
-        
-        document.addEventListener('mousedown', () => {
-            cursor.style.transform = 'scale(0.8)';
-        });
-        
-        document.addEventListener('mouseup', () => {
-            cursor.style.transform = 'scale(1)';
-        });
-        // Video data - 5 vertical 9:16 sample videos for each section
-        const videoData4k = [
-            { src: "https://storage.googleapis.com/facelessbroll_website/instagram_C4dyNz9Nbdk_mute.mp4", title: "Digital Dreamscape" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/VID_20250905_221249_093.mp4", title: "Neural Pathways" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/318020133_244456238648375_4691320352052561618_n(1).mp4", title: "Quantum Flux" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/-237407181909170842.MP4", title: "Virtual Cosmos" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle135.mp4", title: "AI Genesis" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/Auto885%202.mp4", title: "Data Streams" }
-        ];
-
-        const videoDataLuxury = [
-            { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle563.mp4", title: "Luxury Dreams" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle265.mp4", title: "Elegant Vision" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle219.mp4", title: "Premium Glow" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle482.mp4", title: "Exclusive Escape" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/instagram_C1k1CK0oive_mute.mp4", title: "Opulent Joy" },
-            { src: "https://storage.googleapis.com/facelessbroll_website/Lifestyle554.mp4", title: "Lavish Moments" }
-        ];
-        // Generate more luxury reels section (9:16 horizontal scroll)
-        const moreReelsTrack = document.getElementById('moreReelsTrack');
-        
-        // Create duplicate videos for seamless infinite scroll
-        const allMoreVideos = [...videoDataLuxury, ...videoDataLuxury];
-        
-        allMoreVideos.forEach((video, index) => {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            videoItem.innerHTML = `
-                <video autoplay muted loop playsinline>
-                    <source src="${video.src}" type="video/mp4">
-                </video>
-                <div class="video-glow"></div>
-            `;
-            
-            moreReelsTrack.appendChild(videoItem);
-        });
-        // Generate additional luxury reels section
-        const additionalReelsTrack = document.getElementById('additionalReelsTrack');
-        
-        // Create duplicate videos for seamless infinite scroll
-        const allAdditionalVideos = [...videoData4k, ...videoData4k];
-        
-        allAdditionalVideos.forEach((video, index) => {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            videoItem.innerHTML = `
-                <video autoplay muted loop playsinline>
-                    <source src="${video.src}" type="video/mp4">
-                </video>
-                <div class="video-glow"></div>
-            `;
-            
-            additionalReelsTrack.appendChild(videoItem);
-        });
-
-        // Generate duplicate luxury reels section
-        const duplicateReelsTrack = document.getElementById('duplicateReelsTrack');
-        
-        // Create duplicate videos for seamless infinite scroll
-        const allDuplicateVideos = [...videoDataLuxury, ...videoDataLuxury];
-allDuplicateVideos.forEach((video, index) => {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            videoItem.innerHTML = `
-                <video autoplay muted loop playsinline>
-                    <source src="${video.src}" type="video/mp4">
-                </video>
-                <div class="video-glow"></div>
-            `;
-            
-            duplicateReelsTrack.appendChild(videoItem);
-        });
-// Category card animations
-        const categoryCards = document.querySelectorAll('.category-card');
-        
-        categoryCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const video = card.querySelector('video');
-                if (video) {
-                    video.playbackRate = 1.2;
-                }
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                const video = card.querySelector('video');
-                if (video) {
-                    video.playbackRate = 1.0;
-                }
-            });
-        });
-        
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.parallax-bg');
-            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
-            
-            // Fade out title overlay
-            const titleOverlay = document.querySelector('.title-overlay');
-            const opacity = 1 - (scrolled / 300);
-            titleOverlay.style.opacity = Math.max(opacity, 0);
-        });
-// Initialize feather icons
-        feather.replace();
-        
-        // Handle signup form submission
-        function handleSignup() {
-          const nameInput = document.getElementById('signup-name');
-          const emailInput = document.getElementById('signup-email');
-          const name = nameInput?.value?.trim();
-          const email = emailInput?.value?.trim();
-
-          if (!name) { showPopup("Please enter your name.", "error"); return; }
-          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            showPopup("Please enter a valid email address.", "error"); return;
-          }
-// Send data to webhook
-            fetch('https://hook.us1.make.com/hif1y4tjjturtyth2q1j87phccnnuvne', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    timestamp: new Date().toISOString(),
-                    source: 'Faceless B-Roll'
-                })
-            })
-.then(response => {
-                if (response.ok) {
-                    alert('Thank you for signing up! We\'ll be in touch soon.');
-                    emailInput.value = ''; // Clear the input
-                } else {
-                    alert('There was an error with your signup. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error with your signup. Please try again.');
-            });
-        }
-    </script>
 </body>
 </html>
-    <!-- Pricing Section -->
-    <section class="py-20 bg-black relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-light mb-4 text-white">
-                    Choose Your Plan
-                </h2>
-                <p class="text-lg text-white/60 max-w-2xl mx-auto">
-                    Simple, transparent pricing to fit your growth needs
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Starter Plan -->
-                <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10 group">
-                    <div class="mb-6">
-                        <h3 class="text-2xl font-light text-white mb-2">Starter</h3>
-                        <p class="text-white/60">Perfect for beginners</p>
-                    </div>
-                    <div class="mb-8">
-                        <span class="text-5xl font-light text-white">$7.99</span>
-                        <span class="text-white/60">/month</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — 50 Premium Reels/Month</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — 1 Connected Account</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — 5 videos posted weekly</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — 25 Video to choose from</span>
-                        </li>
-                    </ul>
-                    <a href="https://buy.stripe.com/test_eVqeVfc2z4Fj9dZ1drdby03" class="block w-full py-3 px-6 text-center bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300">
-                        Get Started
-                    </a>
-                </div>
-
-                <!-- Pro Plan (Recommended) -->
-                <div class="bg-gradient-to-br from-gray-900 to-black border-2 border-red-600/50 rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-red-600/20 group relative overflow-hidden">
-                    <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                        POPULAR
-                    </div>
-                    <div class="mb-6">
-                        <h3 class="text-2xl font-light text-white mb-2">Pro</h3>
-                        <p class="text-white/60">For serious creators</p>
-                    </div>
-                    <div class="mb-8">
-                        <span class="text-5xl font-light text-white">$14.99</span>
-                        <span class="text-white/60">/month</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — 30 Premium Reels per month</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — Choose 2 Niches</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — AI Captions & Hashtags</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — Up to 2 Connected Channels</span>
-                        </li>
-                    </ul>
-                    <a href="https://buy.stripe.com/test_14A7sN0jR4Fj75R8FTdby04" class="block w-full py-3 px-6 text-center bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300">
-                        Get Started
-                    </a>
-                </div>
-
-                <!-- Agency Plan -->
-                <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-red-600/30 hover:shadow-2xl hover:shadow-red-600/10 group">
-                    <div class="mb-6">
-                        <h3 class="text-2xl font-light text-white mb-2">Growth</h3>
-                        <p class="text-white/60">For teams & businesses</p>
-                    </div>
-                    <div class="mb-8">
-                        <span class="text-5xl font-light text-white">$49</span>
-                        <span class="text-white/60">/month</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — 150 Premium per month</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> —  Unlimited Niches</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> —  Captions & Hashtags</span>
-                        </li>
-                        <li class="flex items-center text-white/80">
-                            <i data-feather="check" class="w-5 h-5 text-red-600 mr-2"></i>
-                            <span> — 200 Videos to choose from</span>
-                        </li>
-                    </ul>
-                    <a href="https://buy.stripe.com/test_4gM7sNfeLdbP2PBg8ldby05" class="block w-full py-3 px-6 text-center bg-transparent border border-white/20 text-white rounded-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300">
-                        Get Started
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-<section class="py-16 bg-black text-white border-t border-white/10">
-  <div class="max-w-4xl mx-auto px-6">
-    <h2 class="text-4xl font-bold text-center mb-12 text-white tracking-wide uppercase">
-
-       
-      Frequently Asked Questions
-    </h2>
-
-    <div class="space-y-4">
-
-      <!-- Question 1 -->
-      <div class="border border-white/10 rounded-xl overflow-hidden">
-        <button 
-          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
-          onclick="toggleFAQ(this)">
-          <span class="text-lg font-semibold text-red-600">What is UTG Labs?</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
-          UTG Labs is an automation platform that helps creators build faceless content channels using ready-to-post luxury 4K reels, automated scheduling, and AI-driven branding tools.
-        </div>
-      </div>
-
-      <!-- Question 2 -->
-      <div class="border border-white/10 rounded-xl overflow-hidden">
-        <button 
-          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
-          onclick="toggleFAQ(this)">
-          <span class="text-lg font-semibold text-red-600">Do I need to show my face to use it?</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
-          No — UTG Labs is designed for faceless creators. You can build a complete personal or business brand without appearing on camera and start making money.
-        </div>
-      </div>
-
-      <!-- Question 3 -->
-      <div class="border border-white/10 rounded-xl overflow-hidden">
-        <button 
-          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
-          onclick="toggleFAQ(this)">
-          <span class="text-lg font-semibold text-red-600">What platforms can I post to?</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
-          You can automate content for Instagram Reels, Youtube Shorts, and Tiktok will be coming soon...
-        </div>
-      </div>
-
-      <!-- Question 4 -->
-      <div class="border border-white/10 rounded-xl overflow-hidden">
-        <button 
-          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
-          onclick="toggleFAQ(this)">
-          <span class="text-lg font-semibold text-red-600">Can I upload my own reels?</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
-          Yes. You can upload your own content, mix it with UTG Labs’ 4K reel packs, and manage everything from one dashboard.
-        </div>
-      </div>
-
-      <!-- Question 5 -->
-      <div class="border border-white/10 rounded-xl overflow-hidden">
-        <button 
-          class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-all duration-300"
-          onclick="toggleFAQ(this)">
-          <span class="text-lg font-semibold text-red-600">Is there a free trial?</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div class="max-h-0 overflow-hidden transition-all duration-500 text-white/70 px-6 pb-4">
-          Yes — you can start free with your first 20 reels to experience the automation tools before upgrading.
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<script>
-function toggleFAQ(button) {
-  const answer = button.nextElementSibling;
-  const svg = button.querySelector("svg");
-  const isOpen = answer.classList.contains("max-h-96");
-
-  // Close all others
-  document.querySelectorAll("[id^='duplicateReelsTrack'] ~ div div.max-h-96, section div.max-h-96").forEach(el => {
-    el.classList.replace("max-h-96", "max-h-0");
-  });
-  document.querySelectorAll("section svg.rotate-180").forEach(icon => {
-    icon.classList.remove("rotate-180");
-  });
-
-  // Toggle clicked one
-  if (!isOpen) {
-    answer.classList.replace("max-h-0", "max-h-96");
-    svg.classList.add("rotate-180");
-  } else {
-    answer.classList.replace("max-h-96", "max-h-0");
-    svg.classList.remove("rotate-180");
-  }
-}
-</script>
-
-
-<script>
-function toggleFAQGrid(btn){
-  const outer = btn.nextElementSibling;          // grid container
-  const svg = btn.querySelector('svg');
-  const open = outer.classList.contains('grid-rows-[1fr]');
-
-  // Accordion behavior: close all
-  document.querySelectorAll('.grid.grid-rows-\\[1fr\\]').forEach(el=>{
-    el.classList.replace('grid-rows-[1fr]','grid-rows-[0fr]');
-  });
-  document.querySelectorAll('button svg.rotate-180').forEach(icon=>{
-    icon.classList.remove('rotate-180');
-  });
-
-  // Toggle this one
-  if(!open){
-    outer.classList.replace('grid-rows-[0fr]','grid-rows-[1fr]');
-    svg.classList.add('rotate-180');
-  }
-}
-</script>
-</section>
-    <footer class="py-8 bg-black/90 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="text-white/60 text-xs mb-6">
-                &copy; 2025 Faceless B-Roll. All rights reserved.
-                <div class="mt-2">
-                    <a href="privacy.html" class="text-white/40 hover:text-white/60 transition">Privacy Policy</a> 
-                    <span class="mx-2">•</span>
-                    <a href="agreement.html" class="text-white/40 hover:text-white/60 transition">Terms and Services</a> 
-                    <span class="mx-2"></span>
-      
-                </div>
-            </div>
-        </div>
-    </footer>
