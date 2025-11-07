@@ -344,7 +344,7 @@
         </div>
     </section>
     
- <!-- Email Signup Section -->
+<!-- Email Signup Section -->
 <section class="py-20 bg-black relative" style="margin: 0 auto; max-width: 80vw;">
   <script>
     function showPopup(message, type = "success") {
@@ -370,7 +370,7 @@
 
       document.body.appendChild(popup);
 
-      // Hide after 3 seconds
+      // Fade out after a few seconds
       setTimeout(() => {
         popup.style.opacity = "0";
         setTimeout(() => popup.remove(), 400);
@@ -378,7 +378,25 @@
     }
 
     function handleSignup() {
-      showPopup("✅ Thank you for signing up! We'll be in touch soon.", "success");
+      const name = document.getElementById("signup-name").value.trim();
+      const email = document.getElementById("signup-email").value.trim();
+
+      if (!name) {
+        showPopup("Please enter your first name.", "error");
+        return;
+      }
+
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        showPopup("Please enter a valid email address.", "error");
+        return;
+      }
+
+      // Here you can add your backend request logic later (Make webhook, etc.)
+      showPopup(`✅ Thank you, ${name}! We'll be in touch soon.`, "success");
+
+      // Clear inputs
+      document.getElementById("signup-name").value = "";
+      document.getElementById("signup-email").value = "";
     }
   </script>
 
@@ -388,15 +406,22 @@
         Get Your First 20 Reels Free
       </h2>
       <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8">
-        Enter your email to create your account and begin your journey to automated success.
+        Enter your name and email to create your account and begin your journey to automated success.
       </p>
     </div>
-    <div class="max-w-xl mx-auto">
-      <div class="flex gap-4 justify-center items-center">
+    <div class="max-w-2xl mx-auto">
+      <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+        <input
+          type="text"
+          id="signup-name"
+          placeholder="First Name"
+          class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300"
+        />
         <input
           type="email"
+          id="signup-email"
           placeholder="Enter your email address"
-          class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
+          class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300"
         />
         <button
           onclick="handleSignup()"
@@ -408,6 +433,7 @@
     </div>
   </div>
 </section>
+
 
 
 
