@@ -370,31 +370,29 @@
       document.body.appendChild(popup);
       setTimeout(() => { popup.style.opacity = "0"; setTimeout(() => popup.remove(), 400); }, ms);
     }
+        async function handleSignup() {
+          const nameInput = document.getElementById('signup-name');
+          const emailInput = document.getElementById('signup-email');
+          const name = nameInput?.value?.trim();
+          const email = emailInput?.value?.trim();
 
-    async function handleSignup() {
-      const nameInput = document.getElementById('signup-name');
-      const emailInput = document.getElementById('signup-email');
-      const name = nameInput?.value?.trim();
-      const email = emailInput?.value?.trim();
-
-      if (!name) { showPopup("Please enter your name.", "error"); return; }
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showPopup("Please enter a valid email address.", "error"); return;
-      }
-
-      try {
-        const res = await fetch('/api/forward-to-make', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name,
-            email,
-            timestamp: new Date().toISOString(),
-            source: 'Faceless B-Roll'
-          })
-        });
-
-        if (res.ok) {
+          if (!name) { showPopup("Please enter your name.", "error"); return; }
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showPopup("Please enter a valid email address.", "error"); return;
+          }
+          try {
+            const res = await
+            fetch('https://hook.us1.make.com/hif1y4tjjturtyth2q1j87phccnnuvne', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: name,
+                email: email,
+                timestamp: new Date().toISOString(),
+                source: 'Faceless B-Roll'
+              })
+            });
+if (res.ok) {
           showPopup("Thank you for signing up! We'll be in touch soon.", "success");
           nameInput.value = '';
           emailInput.value = '';
@@ -658,27 +656,29 @@ allDuplicateVideos.forEach((video, index) => {
         
         // Handle signup form submission
         function handleSignup() {
-            const emailInput = document.querySelector('input[type="email"]');
-            const email = emailInput.value.trim();
-            
-            if (!email) {
-                alert('Please enter your email address');
-                return;
-            }
-            
-            // Send data to webhook
+          const nameInput = document.getElementById('signup-name');
+          const emailInput = document.getElementById('signup-email');
+          const name = nameInput?.value?.trim();
+          const email = emailInput?.value?.trim();
+
+          if (!name) { showPopup("Please enter your name.", "error"); return; }
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showPopup("Please enter a valid email address.", "error"); return;
+          }
+// Send data to webhook
             fetch('https://hook.us1.make.com/hif1y4tjjturtyth2q1j87phccnnuvne', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    name: name,
                     email: email,
                     timestamp: new Date().toISOString(),
-                    source: 'Faceless B-Rol'
+                    source: 'Faceless B-Roll'
                 })
             })
-            .then(response => {
+.then(response => {
                 if (response.ok) {
                     alert('Thank you for signing up! We\'ll be in touch soon.');
                     emailInput.value = ''; // Clear the input
