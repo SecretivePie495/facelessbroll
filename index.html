@@ -352,12 +352,38 @@
       window.top.location = window.location.href;
     }
 
+    // Function to show an on-page popup message
+    function showMessage(text, type = "success") {
+      const msg = document.createElement("div");
+      msg.textContent = text;
+      msg.style.position = "fixed";
+      msg.style.bottom = "40px";
+      msg.style.left = "50%";
+      msg.style.transform = "translateX(-50%)";
+      msg.style.padding = "16px 28px";
+      msg.style.borderRadius = "12px";
+      msg.style.fontSize = "18px";
+      msg.style.zIndex = "9999";
+      msg.style.transition = "opacity 0.4s ease";
+      msg.style.backgroundColor = type === "success" ? "#111" : "#500";
+      msg.style.color = type === "success" ? "#ff2e2e" : "#fff";
+      msg.style.border = "1px solid rgba(255,0,0,0.3)";
+      msg.style.boxShadow = "0 0 20px rgba(255,0,0,0.2)";
+      document.body.appendChild(msg);
+
+      // Fade out after 3 seconds
+      setTimeout(() => {
+        msg.style.opacity = "0";
+        setTimeout(() => msg.remove(), 400);
+      }, 3000);
+    }
+
     async function handleSignup() {
       const input = document.getElementById('signup-email');
       const email = input?.value?.trim();
 
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Please enter a valid email address.');
+        showMessage('Please enter a valid email address.', 'error');
         return;
       }
 
@@ -373,15 +399,15 @@
         });
 
         if (res.ok) {
-          alert("✅ Thank you for signing up! We'll be in touch soon.");
+          showMessage("✅ Thank you for signing up! We'll be in touch soon.", 'success');
           input.value = '';
         } else {
           console.error('Server error:', res.status, await res.text());
-          alert('There was an error with your signup. Please try again.');
+          showMessage('There was an error with your signup. Please try again.', 'error');
         }
       } catch (err) {
         console.error('Network error:', err);
-        alert('There was an error connecting to the server. Please try again.');
+        showMessage('There was a connection error. Please try again.', 'error');
       }
     }
   </script>
@@ -413,6 +439,7 @@
     </div>
   </div>
 </section>
+
 
 
 <!-- More Luxury Reels Section - Reduced Spacing -->
