@@ -343,76 +343,42 @@
             <!-- Additional reels will be dynamically generated -->
         </div>
     </section>
-    <!-- Email Signup Section -->
+    
+ <!-- Email Signup Section -->
 <section class="py-20 bg-black relative" style="margin: 0 auto; max-width: 80vw;">
   <script>
-    // Prevent embedded preview frames (e.g., atstatic)
-    if (window.top !== window.self) {
-      window.top.location = window.location.href;
-    }
+    function showPopup(message, type = "success") {
+      const popup = document.createElement("div");
+      popup.textContent = message;
 
-    // Simple non-animated popup message (black + red theme)
-    function showMessage(text, type = "success", ms = 3000) {
-      const msg = document.createElement("div");
-      msg.textContent = text;
-      Object.assign(msg.style, {
+      Object.assign(popup.style, {
         position: "fixed",
         bottom: "40px",
         left: "50%",
         transform: "translateX(-50%)",
-        padding: "14px 24px",
-        borderRadius: "10px",
-        fontSize: "16px",
-        zIndex: "9999",
-        opacity: "1",
-        transition: "opacity 0.4s ease",
         backgroundColor: type === "success" ? "#0b0b0b" : "#4a0a0a",
         color: type === "success" ? "#ff2e2e" : "#ffffff",
-        border: "1px solid rgba(255,0,0,0.35)",
+        padding: "14px 26px",
+        borderRadius: "10px",
+        fontSize: "16px",
+        border: "1px solid rgba(255,0,0,0.3)",
         boxShadow: "0 4px 20px rgba(255,0,0,0.2)",
-        textAlign: "center",
+        zIndex: "9999",
+        opacity: "1",
+        transition: "opacity 0.4s ease"
       });
 
-      document.body.appendChild(msg);
+      document.body.appendChild(popup);
 
-      // Fade out after a few seconds
+      // Hide after 3 seconds
       setTimeout(() => {
-        msg.style.opacity = "0";
-        setTimeout(() => msg.remove(), 400);
-      }, ms);
+        popup.style.opacity = "0";
+        setTimeout(() => popup.remove(), 400);
+      }, 3000);
     }
 
-    async function handleSignup() {
-      const input = document.getElementById("signup-email");
-      const email = input?.value?.trim();
-
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showMessage("Please enter a valid email address.", "error");
-        return;
-      }
-
-      try {
-        const res = await fetch("/api/forward-to-make", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email,
-            timestamp: new Date().toISOString(),
-            source: "Faceless B-Roll",
-          }),
-        });
-
-        if (res.ok) {
-          showMessage("Thank you for signing up! We'll be in touch soon.", "success");
-          input.value = "";
-        } else {
-          console.error("Server error:", res.status, await res.text());
-          showMessage("There was an error with your signup. Please try again.", "error");
-        }
-      } catch (err) {
-        console.error("Network error:", err);
-        showMessage("There was a connection error. Please try again.", "error");
-      }
+    function handleSignup() {
+      showPopup("✅ Thank you for signing up! We'll be in touch soon.", "success");
     }
   </script>
 
@@ -429,7 +395,6 @@
       <div class="flex gap-4 justify-center items-center">
         <input
           type="email"
-          id="signup-email"
           placeholder="Enter your email address"
           class="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-600/50 transition-all duration-300 max-w-md"
         />
@@ -443,6 +408,7 @@
     </div>
   </div>
 </section>
+
 
 
 <!-- More Luxury Reels Section - Reduced Spacing -->
