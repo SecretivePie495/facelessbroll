@@ -10,29 +10,16 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: radial-gradient(circle at center, #0a0a0a 0%, #000000 80%);
             color: #ffffff;
             overflow-x: hidden;
         }
-        .privacy-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .privacy-section {
-            margin-bottom: 3rem;
-        }
-        .privacy-title {
-            position: relative;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-        }
+        .privacy-container { max-width: 800px; margin: 0 auto; }
+        .privacy-section { margin-bottom: 3rem; }
+        .privacy-title { position: relative; padding-bottom: 1rem; margin-bottom: 1.5rem; }
         .privacy-title:after {
             content: '';
             position: absolute;
@@ -84,6 +71,7 @@
                 </p>
                 <ul class="text-white/70 list-disc pl-6 space-y-2">
                     <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, email address, Instagram account details (token), and niche preferences that you voluntarily give to us when you register with the Service or choose to participate in various activities related to the Service.</li>
+                    <li><strong>Google Account Data (if you connect Google):</strong> If you choose to connect a Google account to the Service, we may receive limited Google user data necessary to provide features you request (for example, basic account identifiers such as your Google email address and/or access tokens required to perform actions you authorize). We only access Google user data as needed to provide the feature(s) you enable.</li>
                     <li><strong>Derivative Data:</strong> Information our servers automatically collect when you access the Service, such as your IP address, browser type, operating system, access times, and the pages you have viewed directly before and after accessing the Service.</li>
                     <li><strong>Financial Data:</strong> Information related to your payment method (e.g., valid credit card number, card brand, expiration date) that we may collect when you purchase, order, return, exchange, or request information about our services from the Service.</li>
                 </ul>
@@ -105,31 +93,53 @@
                 </ul>
             </div>
 
+            <!-- ✅ ADD THIS NEW SECTION -->
             <div class="privacy-section">
-                <h2 class="text-2xl font-semibold text-white privacy-title">3. Disclosure of Your Information</h2>
+                <h2 class="text-2xl font-semibold text-white privacy-title">3. Google User Data: Retention, Deletion, and User Controls</h2>
+                <p class="text-white/70 mb-4">
+                    If you choose to connect Google services to Faceless B-Roll, you are authorizing us to access Google user data only to provide the specific functionality you enable within the Service.
+                </p>
+
+                <ul class="text-white/70 list-disc pl-6 space-y-2">
+                    <li>
+                        <strong>What we store:</strong> We may store Google authorization credentials (such as OAuth access tokens and refresh tokens) and limited account identifiers (such as the Google email address associated with the connection) to keep the integration working.
+                    </li>
+                    <li>
+                        <strong>What we do not store by default:</strong> Unless a feature explicitly requires it, we do not permanently store the contents of your Google files, emails, calendar events, or other Google content. Any temporary processing is limited to delivering the feature you requested.
+                    </li>
+                    <li>
+                        <strong>How long we retain Google user data:</strong> We retain Google user data only for as long as necessary to provide the integration features you request, comply with legal obligations, resolve disputes, and enforce our agreements. In general, integration tokens and related identifiers are retained while your account remains active and/or until you disconnect the integration.
+                    </li>
+                    <li>
+                        <strong>Disconnecting Google:</strong> You can disconnect Google access at any time within your account settings (if available) or by emailing us at <strong>support@facelessbroll.com</strong>. After disconnection, we will stop accessing Google user data for that account.
+                    </li>
+                    <li>
+                        <strong>Deletion of Google user data:</strong> Upon disconnection or upon request, we will delete stored Google authorization credentials (access/refresh tokens) and associated identifiers from our systems within a reasonable time, unless retention is required for legal, security, or fraud-prevention purposes.
+                    </li>
+                    <li>
+                        <strong>Actions taken on your behalf:</strong> If you enable features that create, modify, or delete data in your Google account (for example, creating a file or event), those actions will only occur based on your explicit configuration and use of the Service. You may disable these features at any time by disconnecting Google or changing your settings.
+                    </li>
+                </ul>
+
+                <p class="text-white/70 mt-4">
+                    You may also revoke the Service’s access to your Google account at any time via your Google Account permissions/security settings.
+                </p>
+            </div>
+
+            <!-- RENUMBER THE SECTIONS BELOW (your old 3 becomes 4, etc.) -->
+            <div class="privacy-section">
+                <h2 class="text-2xl font-semibold text-white privacy-title">4. Disclosure of Your Information</h2>
                 <p class="text-white/70 mb-4">
                     We may share information we have collected about you in certain situations:
                 </p>
                 <ul class="text-white/70 list-disc pl-6 space-y-2">
                     <li><strong>By Law or to Protect Rights:</strong> If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation.</li>
                     <li><strong>Third-Party Service Providers:</strong> We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.</li>
+                    <li><strong>Google user data:</strong> We do not sell Google user data. We only share Google user data with service providers as necessary to operate the Service (for example, secure hosting or logging providers), and only to the extent required to provide the feature you requested.</li>
                 </ul>
             </div>
 
             <div class="privacy-section">
-                <h2 class="text-2xl font-semibold text-white privacy-title">4. Security of Your Information</h2>
+                <h2 class="text-2xl font-semibold text-white privacy-title">5. Security of Your Information</h2>
                 <p class="text-white/70 mb-4">
-                    We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
-                </p>
-            </div>
-
-            <div class="privacy-section">
-                <h2 class="text-2xl font-semibold text-white privacy-title">5. Contact Us</h2>
-                <p class="text-white/70 mb-4">
-                    If you have questions or comments about this Privacy Policy, please contact us at: <strong>support@facelessbroll.com</strong>
-                </p>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+                    We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our
